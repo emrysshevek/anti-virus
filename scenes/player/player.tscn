@@ -5,7 +5,22 @@
 [ext_resource type="Texture2D" uid="uid://cvqg8onsc8p1e" path="res://scenes/player/player.png" id="3_vbhxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iehis"]
-size = Vector2(128, 128)
+size = Vector2(14.5, 14.75)
+
+[sub_resource type="Animation" id="Animation_k0uuh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_sq3cd"]
 resource_name = "idle"
@@ -25,28 +40,14 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_k0uuh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("texture:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ywmpe"]
 _data = {
 "RESET": SubResource("Animation_k0uuh"),
 "idle": SubResource("Animation_sq3cd")
 }
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox")]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox") groups=["player"]]
+collision_mask = 2
 script = ExtResource("1_to4eo")
 player_data = ExtResource("2_wei58")
 texture = NodePath("texture")
@@ -54,11 +55,11 @@ hitbox = NodePath("collision_box")
 
 [node name="texture" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(8, 8)
 texture = ExtResource("3_vbhxh")
 hframes = 4
 
 [node name="collision_box" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.625)
 shape = SubResource("RectangleShape2D_iehis")
 
 [node name="player_animation" type="AnimationPlayer" parent="."]
