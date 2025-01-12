@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://c75dnqr6kgfvo"]
+
+[ext_resource type="Script" path="res://scenes/resources/player_data.gd" id="1_te8bt"]
+
+[resource]
+script = ExtResource("1_te8bt")
+health = 22
+speed = 8
+power = 6
+inventory = false
+position = Vector2(0, 0)
