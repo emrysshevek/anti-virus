@@ -35,6 +35,7 @@ scene = ExtResource("3_scpha")
 metadata/_edit_group_ = true
 
 [node name="Rotator" parent="Spawner" instance=ExtResource("3_h60hu")]
+rps = 0.5
 
 [node name="Projectile" parent="." instance=ExtResource("3_scpha")]
 position = Vector2(125, 168)

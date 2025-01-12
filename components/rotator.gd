@@ -1,7 +1,7 @@
 class_name Rotator
 extends Node2D
 
-@export var rps := 5
+@export var rps := 5.0
 
 var entity: Node2D
 
