@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c84qnmcvaeolr"]
+[gd_scene load_steps=3 format=3 uid="uid://c84qnmcvaeolr"]
 
-[ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://scenes/player/player.tscn" id="1_fu41p"]
+[ext_resource type="PackedScene" uid="uid://77sxxn02dt1s" path="res://damage_square.tscn" id="2_qhh0x"]
+[ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://scenes/player/player.tscn" id="2_s6xfl"]
 
 [node name="Base" type="Node2D"]
 
-[node name="player" parent="." instance=ExtResource("1_fu41p")]
-position = Vector2(48, 58)
+[node name="DamageSquare" parent="." instance=ExtResource("2_qhh0x")]
+position = Vector2(520, 173)
+
+[node name="player" parent="." groups=["walls"] instance=ExtResource("2_s6xfl")]
+position = Vector2(96, 180)

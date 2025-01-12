@@ -15,14 +15,14 @@ run/main_scene="res://tester.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/viewport_width=4608
-window/size/viewport_height=2592
-
 [dotnet]
 
 project/assembly_name="Anti Virus"
+
+[global_group]
+
+walls=""
+player=""
 
 [input]
 

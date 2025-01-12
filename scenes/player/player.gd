@@ -6,6 +6,7 @@ class_name Player
 @export var player_data: PlayerData
 @export var texture: Sprite2D
 @export var hitbox: CollisionShape2D
+@export var analyzation_area: Area2D
 
 #character variables that are inherit to the player class
 var health: int = 10
@@ -27,6 +28,11 @@ func _ready():
 		power = player_data.power
 		position = player_data.position
 	print("health: ", health, " speed: ", player_data.speed, " power: ", power)
+
+#func _process(delta):
+#	for body in $hurtbox.get_overlapping_bodies():
+#		if body in is_in_group("walls"):
+#			take_damage(1)
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -58,3 +64,26 @@ func player_movement(delta):
 	move_and_slide()
 
 #function to take damage from enemy
+
+func take_damage(damage):
+	health -= damage
+	print("Current Health: " + str(health))
+	if health <= 0:
+		die()
+
+#func _on_hurtbox_area_entered(_area:Area2D):
+#	take_damage(10)
+
+func die():
+	queue_free()
+	
+
+
+func _on_analyzation_area_area_entered(area:Area2D):
+	var overlapping_areas = analyzation_area.get_overlapping_areas()
+	if area.is_in_group("walls") and not $hurtbox:
+		print("Analyzing wall: ", area.name)
+
+	for loc in overlapping_areas:
+		if loc in analyzation_area.get_overlapping_areas() and not $hurtbox:
+			print("Already analyzing wall: ", loc.name)

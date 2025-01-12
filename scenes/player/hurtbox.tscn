@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0jst2x5la5hu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_saeg0"]
+
+[node name="hurtbox" type="Area2D"]
+
+[node name="hurt_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_saeg0")
+debug_color = Color(0.88598, 0.281949, 0.452819, 0.42)
