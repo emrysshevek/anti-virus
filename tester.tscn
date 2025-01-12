@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b5eeywolxp5f6" path="res://components/spawner.tscn" id="2_3vexy"]
 [ext_resource type="PackedScene" uid="uid://dp826dsx2nu3d" path="res://components/rotator.tscn" id="3_h60hu"]
 [ext_resource type="PackedScene" uid="uid://c43n0osr7hqjb" path="res://scenes/enemy/projectile.tscn" id="3_scpha"]
-[ext_resource type="Texture2D" uid="uid://cum37m80tpeic" path="res://assets/bg_meat_tile.png" id="7_w625w"]
+[ext_resource type="Texture2D" uid="uid://c0vk08tpgdkwx" path="res://assets/bg_meat_tile.png" id="7_w625w"]
 
 [node name="Base" type="Node2D"]
 texture_filter = 3

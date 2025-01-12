@@ -65,6 +65,7 @@ texture = ExtResource("3_vbhxh")
 hframes = 4
 
 [node name="collision_box" type="CollisionShape2D" parent="."]
+scale = Vector2(0.14, 0.14)
 shape = SubResource("CircleShape2D_ddd3e")
 
 [node name="player_animation" type="AnimationPlayer" parent="."]
@@ -76,7 +77,7 @@ speed_scale = 0.7
 [node name="analyzation_area" type="Area2D" parent="."]
 
 [node name="analyzation_shape" type="CollisionShape2D" parent="analyzation_area"]
-scale = Vector2(14, 14)
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_0da72")
 debug_color = Color(0.314651, 0.622992, 0.174401, 0.42)
 

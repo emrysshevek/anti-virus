@@ -13,26 +13,21 @@ var health: int = 10
 var inventory: bool
 var power: int = 5
 var max_speed = 400
-const accel = 2500
-const friction = 2000
+const accel = 650
+const friction = 850
 
 #move snap is to make the left, right, up, down movement more reactive, for faster reflexes
-const move_snap: int = 3
+const move_snap: int = 2
 var input = Vector2.ZERO
 
 func _ready():
 	$player_animation.play("idle")
 	if player_data != null:
 		health = player_data.health
-		max_speed = player_data.speed * 100
+		max_speed = player_data.speed * 20
 		power = player_data.power
 		position = player_data.position
 	print("health: ", health, " speed: ", player_data.speed, " power: ", power)
-
-#func _process(delta):
-#	for body in $hurtbox.get_overlapping_bodies():
-#		if body in is_in_group("walls"):
-#			take_damage(1)
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -68,8 +63,8 @@ func player_movement(delta):
 func take_damage(damage):
 	health -= damage
 	print("Current Health: " + str(health))
-	if health <= 0:
-		die()
+	#if health <= 0:
+	#	die()
 
 #func _on_hurtbox_area_entered(_area:Area2D):
 #	take_damage(10)
