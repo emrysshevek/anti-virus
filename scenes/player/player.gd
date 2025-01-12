@@ -20,6 +20,7 @@ const move_snap: int = 3
 var input = Vector2.ZERO
 
 func _ready():
+	$player_animation.play("idle")
 	if player_data != null:
 		health = player_data.health
 		max_speed = player_data.speed * 100
@@ -31,6 +32,11 @@ func _physics_process(delta):
 	player_movement(delta)
 
 func get_input():
+	if input.x < 0: 
+		texture.flip_h = true
+	elif input.x > 0:
+		texture.flip_h = false
+
 	input.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	input.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	return input.normalized()
