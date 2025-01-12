@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0vk08tpgdkwx"
-path="res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"
+uid="uid://deqnsm0qg7dp7"
+path="res://.godot/imported/enemy_flu_carrier.png-131129daee3313a62951c45936e7712e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bg_meat_tile.png"
-dest_files=["res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"]
+source_file="res://assets/enemy_flu_carrier.png"
+dest_files=["res://.godot/imported/enemy_flu_carrier.png-131129daee3313a62951c45936e7712e.ctex"]
 
 [params]
 

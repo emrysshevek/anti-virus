@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://v4nfvxokwuq4"]
+[gd_scene load_steps=10 format=3 uid="uid://v4nfvxokwuq4"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_to4eo"]
 [ext_resource type="Resource" uid="uid://c75dnqr6kgfvo" path="res://scenes/player/player_data.tres" id="2_wei58"]
+[ext_resource type="PackedScene" uid="uid://c0jst2x5la5hu" path="res://scenes/player/hurtbox.tscn" id="3_0yg16"]
 [ext_resource type="Texture2D" uid="uid://cvqg8onsc8p1e" path="res://scenes/player/player.png" id="3_vbhxh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iehis"]
-size = Vector2(14.5, 14.75)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddd3e"]
+radius = 70.0
 
 [sub_resource type="Animation" id="Animation_k0uuh"]
 length = 0.001
@@ -46,24 +47,39 @@ _data = {
 "idle": SubResource("Animation_sq3cd")
 }
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox") groups=["player"]]
-collision_mask = 2
+[sub_resource type="CircleShape2D" id="CircleShape2D_0da72"]
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox", "analyzation_area") groups=["player"]]
 script = ExtResource("1_to4eo")
 player_data = ExtResource("2_wei58")
 texture = NodePath("texture")
 hitbox = NodePath("collision_box")
+analyzation_area = NodePath("analyzation_area")
+
+[node name="hurtbox" parent="." instance=ExtResource("3_0yg16")]
 
 [node name="texture" type="Sprite2D" parent="."]
+z_index = 2
 texture_filter = 1
 texture = ExtResource("3_vbhxh")
 hframes = 4
 
 [node name="collision_box" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.625)
-shape = SubResource("RectangleShape2D_iehis")
+scale = Vector2(0.14, 0.14)
+shape = SubResource("CircleShape2D_ddd3e")
 
 [node name="player_animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ywmpe")
 }
 speed_scale = 0.7
+
+[node name="analyzation_area" type="Area2D" parent="."]
+
+[node name="analyzation_shape" type="CollisionShape2D" parent="analyzation_area"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_0da72")
+debug_color = Color(0.314651, 0.622992, 0.174401, 0.42)
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="analyzation_area" to="." method="_on_analyzation_area_area_entered"]

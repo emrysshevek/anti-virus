@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=384
 window/size/viewport_height=216
+window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
@@ -28,6 +29,7 @@ project/assembly_name="Anti Virus"
 
 [global_group]
 
+walls=""
 player=""
 
 [input]
