@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://c75dnqr6kgfvo" path="res://scenes/player/player_data.tres" id="2_wei58"]
 [ext_resource type="Texture2D" uid="uid://cvqg8onsc8p1e" path="res://scenes/player/player.png" id="3_vbhxh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iehis"]
-size = Vector2(128, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddd3e"]
+radius = 64.0
 
 [sub_resource type="Animation" id="Animation_sq3cd"]
 resource_name = "idle"
@@ -59,7 +59,7 @@ texture = ExtResource("3_vbhxh")
 hframes = 4
 
 [node name="collision_box" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_iehis")
+shape = SubResource("CircleShape2D_ddd3e")
 
 [node name="player_animation" type="AnimationPlayer" parent="."]
 libraries = {
