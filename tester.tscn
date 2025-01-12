@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://c84qnmcvaeolr"]
+[gd_scene load_steps=7 format=3 uid="uid://dc6ds36xbdg2r"]
 
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://scenes/player/player.tscn" id="1_fu41p"]
+[ext_resource type="Script" path="res://tester.gd" id="1_vvrv3"]
+[ext_resource type="PackedScene" uid="uid://b5eeywolxp5f6" path="res://components/spawner.tscn" id="2_3vexy"]
+[ext_resource type="PackedScene" uid="uid://dp826dsx2nu3d" path="res://components/rotator.tscn" id="3_h60hu"]
+[ext_resource type="PackedScene" uid="uid://c43n0osr7hqjb" path="res://scenes/enemy/projectile.tscn" id="3_scpha"]
+[ext_resource type="Texture2D" uid="uid://cum37m80tpeic" path="res://assets/bg_meat_tile.png" id="7_w625w"]
 
 [node name="Base" type="Node2D"]
+texture_filter = 3
+script = ExtResource("1_vvrv3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("7_w625w")
+stretch_mode = 1
 
 [node name="player" parent="." instance=ExtResource("1_fu41p")]
-position = Vector2(48, 58)
+position = Vector2(49, 45)
+
+[node name="Spawner" parent="." instance=ExtResource("2_3vexy")]
+position = Vector2(193, 98)
+scene = ExtResource("3_scpha")
+metadata/_edit_group_ = true
+
+[node name="Rotator" parent="Spawner" instance=ExtResource("3_h60hu")]
+
+[node name="Projectile" parent="." instance=ExtResource("3_scpha")]
+position = Vector2(125, 168)

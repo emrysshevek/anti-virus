@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://pk86ls5ad5tm"]
+
+[ext_resource type="Script" path="res://scenes/enemy/movements/linear_movement.gd" id="1_wyvrx"]
+
+[node name="LinearMovement" type="Node"]
+script = ExtResource("1_wyvrx")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://trv73ccxx35b"]
+
+[ext_resource type="Script" path="res://scenes/enemy/movements/movement.gd" id="1_vjwmd"]
+
+[node name="Movement" type="Node"]
+script = ExtResource("1_vjwmd")
+speed = null
