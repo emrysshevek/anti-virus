@@ -13,7 +13,7 @@ signal dropped_pickup(which_pickup: Pickup)
 
 func _ready() -> void:
 	timer.wait_time = duration
-	timer.start()
+	# timer.start()
 
 func destroy() -> void:
 

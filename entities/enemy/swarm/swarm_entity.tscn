@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3urkbmnt6vdj"]
+
+[ext_resource type="Script" path="res://entities/enemy/swarm/swarm_entity.gd" id="1_udgau"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y7yoo"]
+friction = 0.07
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5sgxv"]
+radius = 6.0
+
+[node name="SwarmEntity" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 4
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_y7yoo")
+gravity_scale = 0.0
+script = ExtResource("1_udgau")
+type = null
+group = null
+center_weight = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5sgxv")
+debug_color = Color(0.881214, 0.293133, 0.436962, 0.42)
