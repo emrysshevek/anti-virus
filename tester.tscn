@@ -39,3 +39,4 @@ rps = 0.5
 
 [node name="Projectile" parent="." instance=ExtResource("3_scpha")]
 position = Vector2(125, 168)
+damage = 10
