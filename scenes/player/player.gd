@@ -20,6 +20,7 @@ const friction = 850
 const move_snap = 2
 
 @onready var dash_ability: DashAbility = $DashAbility
+@onready var shield_ability: ShieldAbility = $ShieldAbility
 
 var input = Vector2.ZERO
 
@@ -67,6 +68,9 @@ func player_movement(delta):
 		var dash_dir = input_dir if input_dir != Vector2.ZERO else velocity.normalized()
 		dash_ability.start_dash(dash_dir)
 	
+	if Input.is_action_just_pressed("shield"):
+		shield_ability.activate_shield()
+		
 	velocity = dash_ability.update_dash(delta,velocity)
 
 	if not dash_ability.is_dashing:

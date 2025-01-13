@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpcto8eyq00ad"]
+
+[ext_resource type="Texture2D" uid="uid://d0nvdgi3enfno" path="res://assets/shield_01.png" id="1_k7ujx"]
+[ext_resource type="Script" path="res://components/abilities/shield_ability.gd" id="1_o1q6t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0den"]
+
+[node name="shield_ability" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_o1q6t")
+
+[node name="shield_art" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.172549)
+texture_filter = 1
+scale = Vector2(1.35, 1.35)
+texture = ExtResource("1_k7ujx")
+
+[node name="shield_shape" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_h0den")
+
+[node name="shield_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
