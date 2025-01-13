@@ -5,7 +5,8 @@ extends Movement
 @export var turn_speed: float = 5.0
 
 var target_pos: Vector2
-var acceleration = Vector2.ZERO
+var acceleration := Vector2.ZERO
+var velocity := Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	if target == null:
@@ -16,13 +17,15 @@ func _physics_process(delta: float) -> void:
 	target_pos = target.global_position
 
 	acceleration += seek()
-	entity.velocity += acceleration * delta
-	entity.velocity = entity.velocity.limit_length(speed)
+	velocity += acceleration * delta
+	velocity = velocity.limit_length(speed)
+
+	entity.position += velocity * delta
 
 func seek():
 	var steer = Vector2.ZERO
 	var desired = (target_pos - entity.global_position).normalized() * speed
-	steer = (desired - entity.velocity).normalized() * turn_speed
+	steer = (desired - velocity).normalized() * turn_speed
 	return steer
 
 

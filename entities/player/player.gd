@@ -1,5 +1,5 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 #export variables that we can change from the editor, player data is typically grabbed from 
 @export var player_data: PlayerData
