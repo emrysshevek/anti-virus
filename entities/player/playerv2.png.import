@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0vk08tpgdkwx"
-path="res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"
+uid="uid://b8v7nq0db5eeo"
+path="res://.godot/imported/playerv2.png-d2dfe46291d1536a2949043e77b90f22.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bg_meat_tile.png"
-dest_files=["res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"]
+source_file="res://entities/player/playerv2.png"
+dest_files=["res://.godot/imported/playerv2.png-d2dfe46291d1536a2949043e77b90f22.ctex"]
 
 [params]
 

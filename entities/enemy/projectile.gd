@@ -9,10 +9,10 @@ signal dropped_pickup(which_pickup: Pickup)
 @export var duration := 50
 
 @onready var pickup_scene = preload("res://entities/pickups/pseudopod_pickup.tscn")
-@onready var timer = $Timer
+# @onready var timer = $Timer
 
-func _ready() -> void:
-	timer.wait_time = duration
+# func _ready() -> void:
+	# timer.wait_time = duration
 	# timer.start()
 
 func destroy() -> void:

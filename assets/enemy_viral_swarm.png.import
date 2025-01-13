@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0vk08tpgdkwx"
-path="res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"
+uid="uid://cpv8pf34u27mb"
+path="res://.godot/imported/enemy_viral_swarm.png-307a97c76075801165fd99c5940128c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bg_meat_tile.png"
-dest_files=["res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"]
+source_file="res://assets/enemy_viral_swarm.png"
+dest_files=["res://.godot/imported/enemy_viral_swarm.png-307a97c76075801165fd99c5940128c7.ctex"]
 
 [params]
 

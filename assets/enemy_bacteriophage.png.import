@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0vk08tpgdkwx"
-path="res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"
+uid="uid://be7im7i1aitsq"
+path="res://.godot/imported/enemy_bacteriophage.png-b3981ee8fd2a492d01107fbfdd291301.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bg_meat_tile.png"
-dest_files=["res://.godot/imported/bg_meat_tile.png-9f13afff3c9be3b1d80115542e13a742.ctex"]
+source_file="res://assets/enemy_bacteriophage.png"
+dest_files=["res://.godot/imported/enemy_bacteriophage.png-b3981ee8fd2a492d01107fbfdd291301.ctex"]
 
 [params]
 

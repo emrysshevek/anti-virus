@@ -20,7 +20,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			_process_membrane()
 		
 func _process_body(state: PhysicsDirectBodyState2D) -> void:
-	print(swarm.global_position, " ", global_position)
 	if swarm.global_position.distance_to(global_position) > 8:
 		apply_central_impulse(global_position.direction_to(swarm.global_position))
 	else:
