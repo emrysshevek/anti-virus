@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl7vahup0es64"]
+
+[ext_resource type="Script" path="res://entities/enemy/groupings/swarm.gd" id="1_ofdpo"]
+
+[node name="Swarm" type="Area2D"]
+script = ExtResource("1_ofdpo")
+count = null
+cohesion_weight = null
+separation_weight = null
+alignment_weight = null
+goal_weight = null
+health = null
+duration = null
