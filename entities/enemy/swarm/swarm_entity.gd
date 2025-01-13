@@ -1,6 +1,8 @@
 class_name SwarmEntity
 extends RigidBody2D
 
+signal entity_destroyed(which_entity: SwarmEntity)
+
 enum SwarmEntityType {
 	CENTER,
 	BODY,
@@ -10,7 +12,16 @@ enum SwarmEntityType {
 @export var swarm: Swarm
 @export var type: SwarmEntityType
 @export var group: String
-@export var center_weight := 1.0
+@export var node: Node2D
+
+@onready var holder = $NodeHolder
+
+func _ready() -> void:
+	assert(node != null)
+	node.global_position = global_position
+	node.reparent(holder)
+	node.tree_exited.connect(_on_node_exited)
+
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	match type:
@@ -29,3 +40,10 @@ func _process_body(state: PhysicsDirectBodyState2D) -> void:
 	
 func _process_membrane() -> void:
 	pass
+
+func _on_node_exited() -> void:
+	for child in holder.get_children():
+		child.reparent(get_parent())
+
+	entity_destroyed.emit(self)
+	queue_free.call_deferred()

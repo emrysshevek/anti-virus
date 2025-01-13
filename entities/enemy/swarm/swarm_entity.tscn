@@ -15,10 +15,9 @@ mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_y7yoo")
 gravity_scale = 0.0
 script = ExtResource("1_udgau")
-type = null
-group = null
-center_weight = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5sgxv")
 debug_color = Color(0.881214, 0.293133, 0.436962, 0.42)
+
+[node name="NodeHolder" type="Node2D" parent="."]

@@ -1,6 +1,8 @@
 class_name Swarm
 extends Projectile
 
+signal swarm_destroyed(which_swarm: Swarm)
+
 @export var entity_scene: PackedScene
 @export var count := 5
 
@@ -28,20 +30,22 @@ func _create_node() -> void:
 
 func _add_entity(node: Node2D, type := SwarmEntity.SwarmEntityType.BODY) -> void:
 	var entity = preload("res://entities/enemy/swarm/swarm_entity.tscn").instantiate()
-	get_parent().add_child(entity)
+	entity.node = node
 	entity.type = type
 	entity.group = group_name
 	entity.swarm = self
+	get_parent().add_child(entity)
 	
 	if not entity.is_node_ready():
 		await entity.ready
 
 	entity.global_position = global_position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
-	node.reparent(entity)
-	node.position = Vector2.ZERO
 	entity.add_to_group(entity.group)
-	node.tree_exited.connect(func(): _remove_entity(entity))
+	entity.entity_destroyed.connect(_on_entity_destroyed)
 
-func _remove_entity(entity: SwarmEntity) -> void:
-
-	entity.queue_free()
+func _on_entity_destroyed(entity: SwarmEntity) -> void:
+	if get_tree().get_node_count_in_group(group_name) <= 1:
+		swarm_destroyed.emit(self)
+		queue_free.call_deferred()
+	else:
+		print(get_tree().get_node_count_in_group(group_name))
