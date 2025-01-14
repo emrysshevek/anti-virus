@@ -3,7 +3,7 @@ extends Node
 
 @export var speed: float = 50
 
-var entity: Projectile
+var entity: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

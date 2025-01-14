@@ -9,11 +9,13 @@ signal dropped_pickup(which_pickup: Pickup)
 @export var duration := 50
 
 @onready var pickup_scene = preload("res://entities/pickups/pseudopod_pickup.tscn")
-# @onready var timer = $Timer
+@onready var timer = Timer.new()
 
-# func _ready() -> void:
-	# timer.wait_time = duration
-	# timer.start()
+func _ready() -> void:
+	timer.autostart = false
+	timer.one_shot = true
+	timer.wait_time = duration
+	timer.start()
 
 func destroy() -> void:
 
@@ -31,7 +33,9 @@ func _on_body_entered(body:Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
 	
-	hit.emit(body as Player)
+	var player = body as Player
+	player.take_damage(1)
+	hit.emit(player)
 	destroy()
 
 func _on_timer_timeout() -> void:

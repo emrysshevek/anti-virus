@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Anti Virus"
-run/main_scene="res://tester.tscn"
+run/main_scene="res://scenes/battle.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=384
-window/size/viewport_height=336
+window/size/viewport_width=768
+window/size/viewport_height=432
 window/size/mode=2
 window/stretch/mode="viewport"
 
@@ -30,6 +30,7 @@ project/assembly_name="Anti Virus"
 
 walls=""
 player=""
+enemy=""
 
 [input]
 
@@ -88,4 +89,4 @@ shield={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-2d/snap/snap_2d_transforms_to_pixel=true
+textures/default_filters/use_nearest_mipmap_filter=true

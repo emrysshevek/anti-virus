@@ -47,5 +47,3 @@ func _on_entity_destroyed(entity: SwarmEntity) -> void:
 	if get_tree().get_node_count_in_group(group_name) <= 1:
 		swarm_destroyed.emit(self)
 		queue_free.call_deferred()
-	else:
-		print(get_tree().get_node_count_in_group(group_name))
