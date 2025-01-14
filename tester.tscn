@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dc6ds36xbdg2r"]
+[gd_scene load_steps=15 format=4 uid="uid://dc6ds36xbdg2r"]
 
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="1_fu41p"]
 [ext_resource type="Script" path="res://tester.gd" id="1_vvrv3"]
@@ -40,6 +40,19 @@ _data = {
 "attack_loop": SubResource("Animation_1yetk")
 }
 
+[sub_resource type="Gradient" id="Gradient_rrwyf"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(0.25098, 0.054902, 0.133333, 0, 0.25098, 0.054902, 0.133333, 0.392157)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ix5sm"]
+gradient = SubResource("Gradient_rrwyf")
+width = 384
+height = 336
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
 [node name="Base" type="Node2D"]
 texture_filter = 3
 script = ExtResource("1_vvrv3")
@@ -79,3 +92,13 @@ speed = 75.0
 
 [node name="player" parent="." instance=ExtResource("1_fu41p")]
 position = Vector2(53, 78)
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ix5sm")
