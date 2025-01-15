@@ -28,7 +28,10 @@ func destroy() -> void:
 
 
 func _on_body_entered(body:Node2D) -> void:
-	if not body.is_in_group("player"):
+	
+	if body.is_in_group("shield"):
+		queue_free()
+	elif not body.is_in_group("player"):
 		return
 	
 	hit.emit(body as Player)

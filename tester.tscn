@@ -64,6 +64,7 @@ autoplay = "attack_loop"
 position = Vector2(100, 100)
 entity_scene = ExtResource("3_scpha")
 count = 15
+duration = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Swarm"]
 position = Vector2(-3.8147e-06, -0.500002)

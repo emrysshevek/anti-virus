@@ -30,6 +30,7 @@ project/assembly_name="Anti Virus"
 
 walls=""
 player=""
+shield=""
 
 [input]
 
