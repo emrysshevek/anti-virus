@@ -60,9 +60,6 @@ libraries = {
 }
 autoplay = "attack_loop"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(49, 45)
-
 [node name="Swarm" parent="." instance=ExtResource("7_hn1lf")]
 position = Vector2(100, 100)
 entity_scene = ExtResource("3_scpha")
@@ -79,3 +76,10 @@ speed = 75.0
 
 [node name="player" parent="." instance=ExtResource("1_fu41p")]
 position = Vector2(53, 78)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(-4, -33)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 1.5
+rotation_smoothing_enabled = true
