@@ -1,0 +1,14 @@
+class_name EnemyState
+extends State
+
+const INIT := "Init"
+const TARGET := "Target"
+const MOVE := "Move"
+const COOLDOWN := "Cooldown"
+
+var entity: Enemy
+
+func _ready() -> void:
+	await owner.ready
+	entity = owner as Enemy
+	assert(entity != null, "The Enemy state type must be used only in the enemy scene. It needs the owner to be a enemy node.")

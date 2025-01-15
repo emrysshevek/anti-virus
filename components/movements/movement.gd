@@ -1,9 +1,7 @@
 class_name Movement
 extends Node
 
-@export var speed: float = 50
-
-var entity: Node2D
+var entity: Enemy
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,3 +9,10 @@ func _ready() -> void:
 		await get_parent().ready
 
 	entity = get_parent()
+
+func _physics_process(delta: float) -> void:
+	if entity.moveable:
+		apply_movement(delta)
+
+func apply_movement(_delta: float) -> void:
+	pass

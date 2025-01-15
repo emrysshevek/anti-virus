@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://demaoybjk1shm"]
+
+[ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemies/enemy.tscn" id="1_p25o1"]
+[ext_resource type="Script" path="res://entities/enemy/basic/basic.gd" id="2_3dldj"]
+[ext_resource type="Script" path="res://components/state machine/state_machine.gd" id="3_ubhpw"]
+[ext_resource type="Script" path="res://entities/enemy/basic/basic_init_state.gd" id="4_kmrrg"]
+[ext_resource type="Script" path="res://entities/enemy/basic/basic_move_state.gd" id="5_8gmf4"]
+[ext_resource type="Script" path="res://entities/enemy/basic/basic_cooldown_state.gd" id="6_akn60"]
+
+[node name="Basic" instance=ExtResource("1_p25o1")]
+script = ExtResource("2_3dldj")
+
+[node name="StateMachine" type="Node" parent="." index="3"]
+script = ExtResource("3_ubhpw")
+
+[node name="Init" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_kmrrg")
+
+[node name="Move" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_8gmf4")
+
+[node name="Cooldown" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("6_akn60")
