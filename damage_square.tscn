@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgrhg"]
 
-[node name="DamageSquare" type="Area2D" groups=["walls"]]
+[node name="DamageSquare" type="Area2D" groups=["enemy", "walls"]]
 script = ExtResource("1_fiban")
 damage = 20
 

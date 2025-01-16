@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var texture: Sprite2D
 @export var hitbox: CollisionShape2D
 @export var analyzation_area: Area2D
+@export var player_damage: float = 5
 
 #character variables that are inherit to the player class
 var health: int = 10
@@ -21,6 +22,7 @@ const move_snap = 2
 
 @onready var dash_ability: DashAbility = $DashAbility
 @onready var shield_ability: ShieldAbility = $ShieldAbility
+@onready var analyzation_timer: Timer = $analyzation_area/analyzation_timer
 
 var input = Vector2.ZERO
 
@@ -31,6 +33,7 @@ func _ready():
 		max_speed = player_data.speed * 20
 		power = player_data.power
 		position = player_data.position
+		analyzation_timer.stop()
 	print("health: ", health, " speed: ", player_data.speed, " power: ", power)
 
 func _physics_process(delta):
@@ -92,10 +95,20 @@ func die():
 	queue_free()
 
 func _on_analyzation_area_area_entered(area: Area2D):
-	var overlapping_areas = analyzation_area.get_overlapping_areas()
-	if area.is_in_group("walls") and not $hurtbox:
-		print("Analyzing wall: ", area.name)
+	if area is Projectile:
+		analyzation_timer.start()
+		#print("Analyzing object: ", area.name)
 
-	for loc in overlapping_areas:
-		if loc in analyzation_area.get_overlapping_areas() and not $hurtbox:
-			print("Already analyzing wall: ", loc.name)
+
+func _on_analyzation_area_area_exited(area):
+	if area is Projectile:
+		analyzation_timer.stop()
+		#print("Stopped analyzing object: ", area.name)
+
+
+func _on_analyzation_timer_timeout():
+	var overlapping_areas = analyzation_area.get_overlapping_areas()
+	for area in overlapping_areas:
+		if area is Projectile:
+			area.health -= int(player_damage)
+			print(str(area.name) + "'s health is now " + str(area.health))

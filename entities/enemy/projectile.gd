@@ -26,6 +26,9 @@ func destroy() -> void:
 	destroyed.emit()
 	queue_free()
 
+func _process(_delta):
+	if health <= 0:
+		destroy()
 
 func _on_body_entered(body:Node2D) -> void:
 	
