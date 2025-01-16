@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://dc6ds36xbdg2r"]
+[gd_scene load_steps=8 format=4 uid="uid://dc6ds36xbdg2r"]
 
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="1_fu41p"]
 [ext_resource type="Script" path="res://tester.gd" id="1_vvrv3"]
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="2_pxqvv"]
 [ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="4_rterb"]
-[ext_resource type="PackedScene" uid="uid://ctbr8isbdt0t3" path="res://components/movements/wave_movement.tscn" id="6_8mo64"]
-[ext_resource type="PackedScene" uid="uid://cigjl4cj7ivhl" path="res://components/movements/tracking_movement.tscn" id="6_spp2n"]
 
 [sub_resource type="Animation" id="Animation_lb0ou"]
 length = 0.001
@@ -49,6 +47,4 @@ position = Vector2(120, 71)
 
 [node name="Basic" parent="." instance=ExtResource("4_rterb")]
 
-[node name="WaveMovement" parent="Basic" instance=ExtResource("6_8mo64")]
-
-[node name="TrackingMovement" parent="Basic" instance=ExtResource("6_spp2n")]
+[editable path="Basic"]

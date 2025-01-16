@@ -1,6 +1,9 @@
 class_name Movement
 extends Node
 
+@export var movement_name: String
+@export var movement_type: String
+
 var entity: Enemy
 
 # Called when the node enters the scene tree for the first time.

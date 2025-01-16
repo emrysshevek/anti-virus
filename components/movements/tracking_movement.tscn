@@ -4,5 +4,5 @@
 
 [node name="TrackingMovement" type="Node"]
 script = ExtResource("1_tevmf")
-turn_speed = null
-speed = null
+movement_name = "track"
+movement_type = "propulsion"

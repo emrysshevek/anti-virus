@@ -4,3 +4,5 @@
 
 [node name="WaveMovement" type="Node"]
 script = ExtResource("1_rbp1e")
+movement_name = "wave"
+movement_type = "modifier"

@@ -4,3 +4,5 @@
 
 [node name="LinearMovement" type="Node"]
 script = ExtResource("1_wyvrx")
+movement_name = "linear"
+movement_type = "propulsion"

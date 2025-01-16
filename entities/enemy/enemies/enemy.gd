@@ -7,11 +7,12 @@ signal mutated(mutation: Enemy)
 
 @export var lifespan: float = 10.0
 
-@export var reproduction_chance: float = 0
+@export var reproduction_chance: float = 1
 @export var reproduction_count: float = 2
-@export var mutation_chance: float = .2
+@export var mutation_chance: float = 1
 
 @export var health: float = 10
+@export var stamina: float = .5
 @export var speed: float = 30
 @export var homing_speed: float = 50
 @export var rps: float = 5
