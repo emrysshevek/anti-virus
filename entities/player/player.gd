@@ -41,6 +41,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("unlock") and not dash_ability.is_unlocked :
 		dash_ability.is_unlocked = true
 		print("you've unlocked the dash ability!")
+	if Input.is_action_pressed("analyze"):
+		analyzation_area.monitoring = true
+	else: 
+		analyzation_area.monitoring = false
 
 func _process(_delta):
 	#give i frames to dash
