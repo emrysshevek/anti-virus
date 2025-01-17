@@ -87,8 +87,9 @@ func player_movement(delta):
 
 #function to take damage from enemy
 func take_damage(damage):
-	health -= damage
-	print("Current Health: " + str(health))
+	super.take_damage(1)
+	# health -= damage
+	# print("Current Health: " + str(health))
 	# if health <= 0:
 	# 	die()
 
@@ -105,10 +106,10 @@ func die():
 # 		analyzation_timer.stop()
 		#print("Stopped analyzing object: ", area.name)
 
-
 func _on_analyzation_timer_timeout():
 	var overlapping_areas = analyzation_area.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Projectile:
 			area.health -= int(player_damage)
 			print(str(area.name) + "'s health is now " + str(area.health))
+			

@@ -17,12 +17,15 @@
 radius = 8.0
 
 [node name="Fungus" instance=ExtResource("1_al264")]
+collision_layer = 2
 script = ExtResource("2_6c30x")
 hover_distance = 300.0
 lifespan = 100000.0
 reproduction_chance = 0.0
 reproduction_count = 0.0
 mutation_chance = 0.0
+max_speed = 50.0
+friction = 0.3
 
 [node name="Hitbox" parent="." index="1"]
 shape = SubResource("CircleShape2D_f8dt3")

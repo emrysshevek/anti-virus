@@ -20,18 +20,10 @@ tile_set = ExtResource("1_034a7")
 position_smoothing_enabled = true
 
 [node name="player" parent="." instance=ExtResource("2_o5pfe")]
-player_damage = null
-health = null
-power = null
-max_speed = null
-homing_speed = null
-rps = null
-moveable = null
-friction = null
 
 [node name="Fungus" parent="." instance=ExtResource("3_615rm")]
 position = Vector2(101, 71)
 
 [node name="MissileAttack" parent="." instance=ExtResource("4_qq52o")]
 position = Vector2(-72, 68)
-homing_speed = 50.0
+lifespan = 10.0
