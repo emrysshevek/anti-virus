@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5eeywolxp5f6"]
+[gd_scene load_steps=2 format=3 uid="uid://b5eeywolxp5f6"]
 
 [ext_resource type="Script" path="res://components/utilities/spawner.gd" id="1_mlopu"]
-[ext_resource type="Texture2D" uid="uid://g5le0iiyx3w2" path="res://assets/sprites/enemies/enemy_flu_carrier.png" id="2_miqki"]
 
 [node name="Spawner" type="Node2D"]
 texture_filter = 3
 script = ExtResource("1_mlopu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_miqki")
 hframes = 4

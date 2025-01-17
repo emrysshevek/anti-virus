@@ -18,12 +18,12 @@ signal mutated(mutation: Enemy)
 @export var rps: float = 5
 @export var friction: float = .05
 @export var damage: float = 1
+@export var moveable := false
 
 @export var variation: float = .1
 
 var target_position: Vector2
 var self_scene: PackedScene
-var moveable = false
 
 @onready var lifespan_timer: Timer = $Timer
 
@@ -63,6 +63,9 @@ func clone() -> Enemy:
 	clone.self_scene = self_scene
 	return clone
 	
+func kill() -> void:
+	died.emit(self)
+	queue_free.call_deferred()
 
 func _pack_self() -> void:
 	print("packing self")
@@ -102,4 +105,4 @@ func _on_end_of_life() -> void:
 	queue_free()
 
 func _on_timer_timeout() -> void:
-	pass
+	_on_end_of_life()

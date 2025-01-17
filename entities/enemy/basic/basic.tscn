@@ -21,3 +21,4 @@ script = ExtResource("5_8gmf4")
 
 [node name="Cooldown" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_akn60")
+cooldown_duration = 2.0

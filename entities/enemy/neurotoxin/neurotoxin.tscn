@@ -13,19 +13,10 @@ radius = 15.0333
 [node name="Neurotoxin" instance=ExtResource("1_55y6o")]
 collision_layer = 2
 script = ExtResource("2_nujps")
-lifespan = 30.0
-reproduction_chance = null
-reproduction_count = null
-mutation_chance = 0.2
-health = null
-stamina = null
-speed = 15.0
-homing_speed = null
-rps = null
-friction = null
-damage = null
-variation = null
 bubble_interval = Vector2(3, 3)
+lifespan = 30.0
+mutation_chance = 0.2
+speed = 15.0
 
 [node name="Hitbox" parent="." index="1"]
 position = Vector2(0, -4)
@@ -40,6 +31,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" parent="Detection" index="0"]
 position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_rmhnt")
 
 [node name="TrackingMovement" parent="." index="4" instance=ExtResource("4_iq8ax")]
 

@@ -7,11 +7,16 @@ var target_pos: Vector2
 var acceleration := Vector2.ZERO
 var velocity := Vector2.ZERO
 
+func _ready() -> void:
+	super._ready()
+	print("tracking parent is ", get_parent())
+
 func apply_movement(delta: float) -> void:
 	if target == null:
 		target = get_tree().get_first_node_in_group("player")
 		if target == null:
-			return
+			target = entity
+		
 
 	target_pos = target.global_position
 
@@ -26,5 +31,3 @@ func seek():
 	var desired = (target_pos - entity.global_position).normalized() * entity.speed
 	steer = (desired - velocity).normalized() * entity.homing_speed
 	return steer
-
-

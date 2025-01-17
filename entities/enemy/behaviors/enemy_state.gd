@@ -4,6 +4,8 @@ extends State
 const INIT := "Init"
 const TARGET := "Target"
 const MOVE := "Move"
+const WINDUP := "Windup"
+const ATTACK := "Attack"
 const COOLDOWN := "Cooldown"
 
 var entity: Enemy
