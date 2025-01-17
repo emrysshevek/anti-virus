@@ -32,6 +32,7 @@ walls=""
 player=""
 enemy=""
 movement=""
+shield=""
 
 [input]
 

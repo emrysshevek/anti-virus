@@ -40,19 +40,27 @@ libraries = {
 }
 autoplay = "attack_loop"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(49, 45)
+[node name="Swarm" parent="." instance=ExtResource("7_hn1lf")]
+position = Vector2(100, 100)
+entity_scene = ExtResource("3_scpha")
+count = 15
+duration = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Swarm"]
+position = Vector2(-3.8147e-06, -0.500002)
+scale = Vector2(0.046875, 0.0390625)
+texture = ExtResource("7_ok174")
+
+[node name="TrackingMovement" parent="Swarm" instance=ExtResource("6_spp2n")]
+turn_speed = 100.0
+speed = 75.0
 
 [node name="player" parent="." instance=ExtResource("1_fu41p")]
-position = Vector2(120, 71)
+position = Vector2(53, 78)
 
-[node name="Fungus" parent="." instance=ExtResource("4_2bnsg")]
-hover_distance = 100.0
-friction = 0.1
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_xhy1q")
-
-[editable path="Fungus"]
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(-4, -33)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 1.5
+rotation_smoothing_enabled = true

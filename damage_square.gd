@@ -2,6 +2,7 @@ extends Area2D
 class_name DamageSquare
 
 @export var damage: int
+@export var health: int = 50
 
 func _ready():
     pass

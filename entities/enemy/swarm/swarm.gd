@@ -43,7 +43,9 @@ func _add_entity(node: Node2D, type := SwarmEntity.SwarmEntityType.BODY) -> void
 	entity.add_to_group(entity.group)
 	entity.entity_destroyed.connect(_on_entity_destroyed)
 
-func _on_entity_destroyed(entity: SwarmEntity) -> void:
+func _on_entity_destroyed(_entity: SwarmEntity) -> void:
 	if get_tree().get_node_count_in_group(group_name) <= 1:
 		swarm_destroyed.emit(self)
 		queue_free.call_deferred()
+	else:
+		print("projectiles left: " + str(get_tree().get_node_count_in_group(group_name)))

@@ -77,11 +77,17 @@ libraries = {
 speed_scale = 0.7
 
 [node name="analyzation_area" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+collision_layer = 15
+collision_mask = 15
 
 [node name="analyzation_shape" type="CollisionShape2D" parent="analyzation_area"]
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_0da72")
 debug_color = Color(0.314651, 0.622992, 0.174401, 0.42)
+
+[node name="analyzation_timer" type="Timer" parent="analyzation_area"]
+wait_time = 0.1
 
 [node name="DashAbility" type="Node" parent="."]
 script = ExtResource("5_d1tlo")
@@ -93,3 +99,5 @@ is_unlocked = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="analyzation_area" to="." method="_on_analyzation_area_area_entered"]
+[connection signal="area_exited" from="analyzation_area" to="." method="_on_analyzation_area_area_exited"]
+[connection signal="timeout" from="analyzation_area/analyzation_timer" to="." method="_on_analyzation_timer_timeout"]
