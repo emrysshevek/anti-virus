@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1l3b6yum1twe"]
+
+[ext_resource type="PackedScene" uid="uid://deifenwaqneka" path="res://components/effects/effect.tscn" id="1_3jx7d"]
+[ext_resource type="Script" path="res://components/effects/slow.gd" id="2_yoivt"]
+
+[node name="SlowEffect" instance=ExtResource("1_3jx7d")]
+script = ExtResource("2_yoivt")
+slow_factor = 0.5
+effect_name = "Slow"

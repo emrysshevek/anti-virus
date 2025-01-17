@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cigjl4cj7ivhl"]
-
-[ext_resource type="Script" path="res://entities/enemy/movements/tracking_movement.gd" id="1_tevmf"]
-
-[node name="TrackingMovement" type="Node"]
-script = ExtResource("1_tevmf")
-turn_speed = null
-speed = null

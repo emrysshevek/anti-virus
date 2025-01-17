@@ -34,7 +34,7 @@ func _process_body(state: PhysicsDirectBodyState2D) -> void:
 	if swarm.global_position.distance_to(global_position) > 8:
 		apply_central_impulse(global_position.direction_to(swarm.global_position))
 	else:
-		apply_central_impulse(swarm.global_position.direction_to(global_position) * .5)
+		apply_central_impulse(swarm.global_position.direction_to(global_position))
 	
 	state.linear_velocity = state.linear_velocity.limit_length(100)
 	
@@ -43,7 +43,7 @@ func _process_membrane() -> void:
 
 func _on_node_exited() -> void:
 	for child in holder.get_children():
-		child.reparent(get_parent())
+		child.reparent.call_deferred(get_parent())
 
 	entity_destroyed.emit(self)
 	queue_free.call_deferred()

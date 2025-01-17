@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckd78h1tgoyt3"]
+
+[ext_resource type="PackedScene" uid="uid://c43n0osr7hqjb" path="res://entities/attacks/attack.tscn" id="1_1kwbm"]
+[ext_resource type="Script" path="res://entities/attacks/slow_attack.gd" id="2_i13qq"]
+[ext_resource type="Texture2D" uid="uid://c7hbx4iwrb0jd" path="res://icon.svg" id="3_6migu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0p6rq"]
+radius = 16.0
+
+[node name="SlowAttack" instance=ExtResource("1_1kwbm")]
+script = ExtResource("2_i13qq")
+duration = 10
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(1, 1, 0.188235, 0.627451)
+z_index = -2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_6migu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_0p6rq")
