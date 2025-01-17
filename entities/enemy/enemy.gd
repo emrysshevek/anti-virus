@@ -35,7 +35,6 @@ func _ready() -> void:
 	lifespan_timer.wait_time = lifespan
 	lifespan_timer.start()
 
-
 func _physics_process(delta: float) -> void:
 	for area in $Detection.get_overlapping_areas():
 		if area.get_parent().is_in_group("enemy"):

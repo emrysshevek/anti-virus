@@ -11,7 +11,9 @@ func _ready() -> void:
 	if not get_parent().is_node_ready():
 		await get_parent().ready
 
-	entity = get_parent()
+	entity = get_parent() as Node2D
+	assert(entity != null, "Move component parent must be a Node2D")
+
 
 func _physics_process(delta: float) -> void:
 	if entity.moveable:

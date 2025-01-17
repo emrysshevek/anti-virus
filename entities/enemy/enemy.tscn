@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://m8xobidog0rl"]
 
-[ext_resource type="Script" path="res://entities/enemy/enemies/enemy.gd" id="1_ducmx"]
+[ext_resource type="Script" path="res://entities/enemy/enemy.gd" id="1_ducmx"]
 [ext_resource type="Texture2D" uid="uid://dhwe8i8tnp3e4" path="res://assets/sprites/enemies/enemy_viral_swarm.png" id="2_6x7dl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jj237"]

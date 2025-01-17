@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="1_fu41p"]
 [ext_resource type="Script" path="res://tester.gd" id="1_vvrv3"]
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="2_pxqvv"]
-[ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="4_rterb"]
+[ext_resource type="PackedScene" uid="uid://vy402sk3dca" path="res://entities/enemy/neurotoxin/neurotoxin.tscn" id="4_hevpq"]
 
 [sub_resource type="Animation" id="Animation_lb0ou"]
 length = 0.001
@@ -45,6 +45,4 @@ position = Vector2(49, 45)
 [node name="player" parent="." instance=ExtResource("1_fu41p")]
 position = Vector2(120, 71)
 
-[node name="Basic" parent="." instance=ExtResource("4_rterb")]
-
-[editable path="Basic"]
+[node name="Neurotoxin" parent="." instance=ExtResource("4_hevpq")]
