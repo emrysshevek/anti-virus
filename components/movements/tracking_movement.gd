@@ -7,10 +7,6 @@ var target_pos: Vector2
 var acceleration := Vector2.ZERO
 var velocity := Vector2.ZERO
 
-func _ready() -> void:
-	super._ready()
-	print("tracking parent is ", get_parent())
-
 func apply_movement(delta: float) -> void:
 	if target == null:
 		target = get_tree().get_first_node_in_group("player")

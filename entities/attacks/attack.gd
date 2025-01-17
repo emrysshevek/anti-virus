@@ -5,7 +5,7 @@ signal hit(entity: Node2D)
 signal destroyed()
 
 @export var health := 100
-@export var duration := 50
+@export var duration := 50.0
 
 @onready var timer: Timer = $Timer
 
@@ -16,31 +16,15 @@ func _ready() -> void:
 	timer.start()
 
 func destroy() -> void:
-
-	# if randf() < .2:
-	# 	var pickup: Pickup = pickup_scene.instantiate()
-	# 	get_parent().add_child(pickup)
-	# 	pickup.global_position = global_position
-	# 	dropped_pickup.emit(pickup)
-
 	destroyed.emit()
 	queue_free()
 
 func _activate_effect(body: Node2D) -> void:
 	pass
 
-
-func _on_body_entered(body:Node2D) -> void:
-
-	_activate_effect(body)
-
-	# if not body.is_in_group("player"):
-	# 	return
-	
-	# var player = body as Player
-	# player.take_damage(1)
-	# hit.emit(player)
-	# destroy()
+func _physics_process(delta: float) -> void:
+	for body in get_overlapping_bodies():
+		_activate_effect(body)
 
 func _on_timer_timeout() -> void:
 	destroy()

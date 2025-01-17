@@ -86,25 +86,12 @@ func player_movement(delta):
 	move_and_slide()
 
 #function to take damage from enemy
+# player health is discrete and every hit only counts for one
 func take_damage(damage):
 	super.take_damage(1)
-	# health -= damage
-	# print("Current Health: " + str(health))
-	# if health <= 0:
-	# 	die()
 
 func die():
 	queue_free()
-
-# func _on_analyzation_area_area_entered(area: Area2D):
-# 	if area is Projectile:
-# 		analyzation_timer.start()
-		#print("Analyzing object: ", area.name)
-
-# func _on_analyzation_area_area_exited(area):
-# 	if area is Projectile:
-# 		analyzation_timer.stop()
-		#print("Stopped analyzing object: ", area.name)
 
 func _on_analyzation_timer_timeout():
 	var overlapping_areas = analyzation_area.get_overlapping_areas()
@@ -112,4 +99,13 @@ func _on_analyzation_timer_timeout():
 		if area is Projectile:
 			area.health -= int(player_damage)
 			print(str(area.name) + "'s health is now " + str(area.health))
-			
+
+func _on_analyzation_area_body_entered(body:Node2D) -> void:
+	if body is Enemy:
+		analyzation_timer.start()
+		print("Analyzing object: ", body.name)
+
+func _on_analyzation_area_body_exited(body:Node2D) -> void:
+	if body is Enemy:
+		analyzation_timer.stop()
+		print("Stopped analyzing object: ", body.name)

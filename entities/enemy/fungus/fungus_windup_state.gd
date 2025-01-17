@@ -6,7 +6,6 @@ var player: Player
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	player = get_tree().get_first_node_in_group("player")
-	print("windup player: ", player)
 	timer = get_tree().create_timer(1)
 	timer.timeout.connect(_on_timer_timeout)
 
