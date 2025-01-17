@@ -9,9 +9,6 @@ script = ExtResource("2_yypp2")
 lifespan = 5.0
 reproduction_chance = 0.0
 reproduction_count = 0.0
-speed = 100.0
-homing_speed = 100.0
-moveable = true
 
 [node name="Detection" parent="." index="3"]
 collision_mask = 3

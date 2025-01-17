@@ -1,5 +1,5 @@
 class_name Player
-extends CharacterBody2D
+extends Entity
 
 #export variables that we can change from the editor, player data is typically grabbed from 
 @export var player_data: PlayerData
@@ -9,13 +9,10 @@ extends CharacterBody2D
 @export var player_damage: float = 5
 
 #character variables that are inherit to the player class
-var health: int = 10
 var inventory: bool
-var power: int = 5
 
-var max_speed = 400
 const accel = 650
-const friction = 850
+# const friction = 850
 
 #move snap is to make the left, right, up, down movement more reactive, for faster reflexes
 const move_snap = 2
@@ -94,15 +91,14 @@ func take_damage(damage):
 func die():
 	queue_free()
 
-func _on_analyzation_area_area_entered(area: Area2D):
-	if area is Projectile:
-		analyzation_timer.start()
+# func _on_analyzation_area_area_entered(area: Area2D):
+# 	if area is Projectile:
+# 		analyzation_timer.start()
 		#print("Analyzing object: ", area.name)
 
-
-func _on_analyzation_area_area_exited(area):
-	if area is Projectile:
-		analyzation_timer.stop()
+# func _on_analyzation_area_area_exited(area):
+# 	if area is Projectile:
+# 		analyzation_timer.stop()
 		#print("Stopped analyzing object: ", area.name)
 
 

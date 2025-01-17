@@ -22,12 +22,12 @@ func apply_movement(delta: float) -> void:
 
 	acceleration += seek()
 	velocity += acceleration * delta
-	velocity = velocity.limit_length(entity.speed)
+	velocity = velocity.limit_length(entity.max_speed)
 
 	entity.velocity = velocity
 
 func seek():
 	var steer = Vector2.ZERO
-	var desired = (target_pos - entity.global_position).normalized() * entity.speed
+	var desired = (target_pos - entity.global_position).normalized() * entity.max_speed
 	steer = (desired - velocity).normalized() * entity.homing_speed
 	return steer

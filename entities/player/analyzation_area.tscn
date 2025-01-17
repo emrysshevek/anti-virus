@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbc2o4xi4lw42"]
+
+[ext_resource type="Script" path="res://entities/player/analyzation_area.gd" id="1_okfq8"]
+
+[node name="analyzation_area" type="Area2D"]
+script = ExtResource("1_okfq8")

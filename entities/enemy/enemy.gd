@@ -1,9 +1,9 @@
 class_name Enemy
-extends CharacterBody2D
+extends Entity
 
-signal died(which_entity: Enemy)
 signal reproduced(child: Enemy)
 signal mutated(mutation: Enemy)
+signal dropped_pickup(which_pickup: Pickup)
 
 @export var lifespan: float = 10.0
 
@@ -11,15 +11,7 @@ signal mutated(mutation: Enemy)
 @export var reproduction_count: float = 2
 @export var mutation_chance: float = 1
 
-@export var health: float = 10
 @export var stamina: float = .5
-@export var speed: float = 30
-@export var homing_speed: float = 50
-@export var rps: float = 5
-@export var friction: float = .05
-@export var damage: float = 1
-@export var moveable := false
-
 @export var variation: float = .1
 
 var target_position: Vector2
@@ -39,11 +31,11 @@ func _physics_process(delta: float) -> void:
 	for area in $Detection.get_overlapping_areas():
 		if area.get_parent().is_in_group("enemy"):
 			global_position += area.global_position.direction_to(global_position)
-	
+
 	move_and_slide()
 
 func print_stats() -> void:
-	print("lifespan: ", lifespan, ", repro chance: ", reproduction_chance, ", repro count: ", reproduction_chance, "mutate chance: ", mutation_chance, ", health: ", health, ", speed: ", speed, ", turn speed: ", homing_speed, ", damage: ", damage)
+	print("lifespan: ", lifespan, ", repro chance: ", reproduction_chance, ", repro count: ", reproduction_chance, "mutate chance: ", mutation_chance, ", health: ", health, ", max_speed: ", max_speed, ", turn max_speed: ", homing_speed, ", power: ", power)
 
 func randomize_stats() -> void:
 	lifespan = lifespan * randf_range(1-variation, 1+variation)
@@ -52,9 +44,9 @@ func randomize_stats() -> void:
 	mutation_chance = clamp(mutation_chance * randf_range(1-variation, 1+variation), 0, 1)
 
 	health = max(health * randf_range(1-variation, 1+variation), 1)
-	speed = max(speed * randf_range(1-variation, 1+variation), 0)
-	homing_speed = max(health * randf_range(1-variation, 1+variation), 0)
-	damage = max(health * randf_range(1-variation, 1+variation), 0)
+	max_speed = max(max_speed * randf_range(1-variation, 1+variation), 0)
+	homing_speed = max(homing_speed * randf_range(1-variation, 1+variation), 0)
+	power = max(power * randf_range(1-variation, 1+variation), 0)
 
 func clone() -> Enemy:
 	if self_scene == null:
@@ -64,8 +56,12 @@ func clone() -> Enemy:
 	return clone
 	
 func kill() -> void:
-	died.emit(self)
-	queue_free.call_deferred()
+	if randf() < .2:
+		var pickup: Pickup = preload("res://entities/pickups/pickup.tscn").instantiate()
+		get_parent().add_child(pickup)
+		pickup.global_position = global_position
+		dropped_pickup.emit(pickup)
+	die()
 
 func _pack_self() -> void:
 	print("packing self")
@@ -101,8 +97,7 @@ func _on_end_of_life() -> void:
 	if reproduction_chance > 0 and randf() < reproduction_chance:
 		_reproduce()
 
-	died.emit(self)
-	queue_free()
+	die()
 
 func _on_timer_timeout() -> void:
 	_on_end_of_life()

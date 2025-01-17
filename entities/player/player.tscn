@@ -57,6 +57,14 @@ player_data = ExtResource("2_o06pk")
 texture = NodePath("texture")
 hitbox = NodePath("collision_box")
 analyzation_area = NodePath("analyzation_area")
+player_damage = null
+health = null
+power = null
+max_speed = null
+homing_speed = null
+rps = null
+moveable = null
+friction = null
 
 [node name="hurtbox" parent="." instance=ExtResource("3_0yg16")]
 

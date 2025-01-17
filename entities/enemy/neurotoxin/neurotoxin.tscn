@@ -16,7 +16,6 @@ script = ExtResource("2_nujps")
 bubble_interval = Vector2(3, 3)
 lifespan = 30.0
 mutation_chance = 0.2
-speed = 15.0
 
 [node name="Hitbox" parent="." index="1"]
 position = Vector2(0, -4)
