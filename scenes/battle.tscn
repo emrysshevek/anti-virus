@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=4 uid="uid://da4i4s1711r03"]
 
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="1_034a7"]
+[ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="2_gg0md"]
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="2_o5pfe"]
 [ext_resource type="PackedScene" uid="uid://diqfplhlircr0" path="res://entities/enemy/fungus/fungus.tscn" id="3_615rm"]
-[ext_resource type="PackedScene" uid="uid://djm3wowsocey2" path="res://entities/attacks/missile_attack.tscn" id="4_qq52o"]
 
 [node name="Battle" type="Node2D"]
 
@@ -19,11 +19,12 @@ tile_set = ExtResource("1_034a7")
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
+[node name="Basic" parent="." instance=ExtResource("2_gg0md")]
+position = Vector2(-166, 113)
+
 [node name="player" parent="." instance=ExtResource("2_o5pfe")]
 
 [node name="Fungus" parent="." instance=ExtResource("3_615rm")]
-position = Vector2(101, 71)
+position = Vector2(186, 100)
 
-[node name="MissileAttack" parent="." instance=ExtResource("4_qq52o")]
-position = Vector2(-72, 68)
-lifespan = 10.0
+[editable path="player"]

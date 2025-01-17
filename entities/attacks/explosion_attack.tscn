@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3plawpk4mmuy"]
+
+[ext_resource type="PackedScene" uid="uid://c43n0osr7hqjb" path="res://entities/attacks/attack.tscn" id="1_c0ngq"]
+[ext_resource type="Script" path="res://entities/attacks/explosion_attack.gd" id="2_wd3a0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n2k2o"]
+radius = 16.0
+
+[node name="ExplosionAttack" instance=ExtResource("1_c0ngq")]
+script = ExtResource("2_wd3a0")
+duration = 0.2
+
+[node name="Sprite2D" parent="." index="0"]
+texture = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_n2k2o")

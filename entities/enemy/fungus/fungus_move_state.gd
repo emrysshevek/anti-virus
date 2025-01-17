@@ -17,5 +17,4 @@ func physics_update(_delta: float) -> void:
 		return
 
 	if player.global_position.distance_to(fungus.global_position) > fungus.hover_distance:
-		print("out of range")
 		finished.emit(WINDUP)

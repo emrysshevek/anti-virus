@@ -8,4 +8,4 @@ health = 22
 speed = 5
 power = 6
 inventory = false
-position = Vector2(50, 50)
+position = Vector2(0, 0)
