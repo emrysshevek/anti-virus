@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://da4i4s1711r03"]
+[gd_scene load_steps=7 format=4 uid="uid://da4i4s1711r03"]
 
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="1_034a7"]
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="2_o5pfe"]
 [ext_resource type="PackedScene" uid="uid://d3y3ftfcfme0y" path="res://entities/enemy/bacteriophage/bacteriophage.tscn" id="3_m0dax"]
 [ext_resource type="PackedScene" uid="uid://dtbym2480qf5v" path="res://entities/pickups/upgrades/upgrade.tscn" id="5_607en"]
 [ext_resource type="PackedScene" uid="uid://bs5xxbng5t4f2" path="res://scenes/hud/hud.tscn" id="5_ovs87"]
+[ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="6_fccbe"]
 
 [node name="Battle" type="Node2D"]
 
@@ -50,5 +51,11 @@ upgrade_name = 5
 position = Vector2(245, 160)
 scale = Vector2(1.01521, 1)
 upgrade_name = 5
+
+[node name="Basic" parent="." instance=ExtResource("6_fccbe")]
+position = Vector2(71, 110)
+
+[node name="Basic2" parent="." instance=ExtResource("6_fccbe")]
+position = Vector2(32, 145)
 
 [editable path="player"]

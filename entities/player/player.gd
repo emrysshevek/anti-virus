@@ -42,7 +42,6 @@ func _physics_process(delta):
 	player_movement(delta)
 	if Input.is_action_just_pressed("unlock"):
 		aquire_dash()
-		aquire_platelet()
 		health += 1
 		
 	if Input.is_action_pressed("analyze"):

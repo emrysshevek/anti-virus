@@ -96,6 +96,7 @@ one_shot = true
 script = ExtResource("5_d1tlo")
 
 [node name="ShieldAbility" parent="." instance=ExtResource("6_kjbor")]
+is_unlocked = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="analyzation_area" to="." method="_on_analyzation_area_body_entered"]

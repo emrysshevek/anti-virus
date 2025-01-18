@@ -1,0 +1,268 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk6qe04uiwgm5"]
+
+[ext_resource type="Texture2D" uid="uid://x7o0qrj67cb4" path="res://assets/initbg2.png" id="1_2x0eb"]
+[ext_resource type="Script" path="res://scenes/MainMenu/main_menu.gd" id="1_pdhih"]
+[ext_resource type="AudioStream" uid="uid://b64iekf2kijds" path="res://sfx/sfx_menu_hover.ogg" id="3_2p6ce"]
+[ext_resource type="AudioStream" uid="uid://ciyhm421hmyq5" path="res://sfx/sfx_menu_select.ogg" id="4_63eu0"]
+[ext_resource type="AudioStream" uid="uid://c1gl584krpty1" path="res://sfx/Main-Menu-Loop-F.ogg" id="5_l3np6"]
+[ext_resource type="Texture2D" uid="uid://cnyvny0l4vdys" path="res://assets/test_square_2.png" id="6_6rans"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pdhih")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(384, 216)
+texture = ExtResource("1_2x0eb")
+
+[node name="MainMenuScreen" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="MainMenuScreen"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 177.0
+offset_right = 174.0
+offset_bottom = 208.0
+text = "Start"
+alignment = 0
+
+[node name="CreditsButton" type="Button" parent="MainMenuScreen"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 215.0
+offset_right = 174.0
+offset_bottom = 246.0
+text = "Credits"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="MainMenuScreen"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 256.0
+offset_right = 174.0
+offset_bottom = 287.0
+text = "Quit"
+alignment = 0
+
+[node name="SfxMenuHover" type="AudioStreamPlayer" parent="MainMenuScreen"]
+stream = ExtResource("3_2p6ce")
+bus = &"SFX"
+
+[node name="SfxMenuSelect" type="AudioStreamPlayer" parent="MainMenuScreen"]
+stream = ExtResource("4_63eu0")
+bus = &"SFX"
+
+[node name="Main-menu-loop-f" type="AudioStreamPlayer" parent="MainMenuScreen"]
+stream = ExtResource("5_l3np6")
+autoplay = true
+bus = &"Background Music"
+parameters/looping = true
+
+[node name="Control" type="Control" parent="MainMenuScreen"]
+custom_minimum_size = Vector2(280, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 224.0
+offset_top = 28.0
+offset_right = 504.0
+offset_bottom = 108.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainMenuScreen/Control"]
+modulate = Color(0.158011, 0.525861, 0.517378, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6rans")
+expand_mode = 3
+
+[node name="GameTitleLabel" type="Label" parent="MainMenuScreen/Control"]
+custom_minimum_size = Vector2(260, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = -4.0
+offset_right = 134.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "Mutation"
+horizontal_alignment = 1
+
+[node name="CreditsScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackButton" type="Button" parent="CreditsScreen"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 344.0
+offset_right = 174.0
+offset_bottom = 375.0
+text = "Return "
+alignment = 0
+
+[node name="SfxMenuHover" type="AudioStreamPlayer" parent="CreditsScreen"]
+stream = ExtResource("3_2p6ce")
+bus = &"SFX"
+
+[node name="SfxMenuSelect" type="AudioStreamPlayer" parent="CreditsScreen"]
+stream = ExtResource("4_63eu0")
+bus = &"SFX"
+
+[node name="Main-menu-loop-f" type="AudioStreamPlayer" parent="CreditsScreen"]
+stream = ExtResource("5_l3np6")
+autoplay = true
+bus = &"Background Music"
+parameters/looping = true
+
+[node name="Control" type="Control" parent="CreditsScreen"]
+custom_minimum_size = Vector2(280, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 224.0
+offset_top = 28.0
+offset_right = 504.0
+offset_bottom = 108.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="CreditsScreen/Control"]
+modulate = Color(0.158011, 0.525861, 0.517378, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6rans")
+expand_mode = 3
+
+[node name="TitleLabel" type="Label" parent="CreditsScreen/Control"]
+custom_minimum_size = Vector2(260, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = -4.0
+offset_right = 134.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="QuitScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackButton" type="Button" parent="QuitScreen"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 344.0
+offset_right = 174.0
+offset_bottom = 375.0
+text = "Return "
+alignment = 0
+
+[node name="ConfirmButton" type="Button" parent="QuitScreen"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 589.0
+offset_top = 344.0
+offset_right = 729.0
+offset_bottom = 375.0
+text = "Quit for real"
+alignment = 0
+
+[node name="SfxMenuHover" type="AudioStreamPlayer" parent="QuitScreen"]
+stream = ExtResource("3_2p6ce")
+bus = &"SFX"
+
+[node name="SfxMenuSelect" type="AudioStreamPlayer" parent="QuitScreen"]
+stream = ExtResource("4_63eu0")
+bus = &"SFX"
+
+[node name="Main-menu-loop-f" type="AudioStreamPlayer" parent="QuitScreen"]
+stream = ExtResource("5_l3np6")
+autoplay = true
+bus = &"Background Music"
+parameters/looping = true
+
+[node name="Control" type="Control" parent="QuitScreen"]
+custom_minimum_size = Vector2(280, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 224.0
+offset_top = 28.0
+offset_right = 504.0
+offset_bottom = 108.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="QuitScreen/Control"]
+modulate = Color(0.158011, 0.525861, 0.517378, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6rans")
+expand_mode = 3
+
+[node name="TitleLabel" type="Label" parent="QuitScreen/Control"]
+custom_minimum_size = Vector2(260, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = -4.0
+offset_right = 134.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="MainMenuScreen/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="MainMenuScreen/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="MainMenuScreen/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
+[connection signal="pressed" from="MainMenuScreen/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="MainMenuScreen/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="MainMenuScreen/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="mouse_entered" from="CreditsScreen/BackButton" to="." method="_on_back_button_mouse_entered"]
+[connection signal="pressed" from="CreditsScreen/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="QuitScreen/BackButton" to="." method="_on_back_button_mouse_entered"]
+[connection signal="pressed" from="QuitScreen/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="QuitScreen/ConfirmButton" to="." method="_on_confirm_button_mouse_entered"]
+[connection signal="pressed" from="QuitScreen/ConfirmButton" to="." method="_on_confirm_quit_button_pressed"]
