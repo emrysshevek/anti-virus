@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://v4nfvxokwuq4"]
+[gd_scene load_steps=13 format=3 uid="uid://v4nfvxokwuq4"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_to4eo"]
 [ext_resource type="Resource" uid="uid://c75dnqr6kgfvo" path="res://entities/player/player_data.tres" id="2_o06pk"]
 [ext_resource type="PackedScene" uid="uid://c0jst2x5la5hu" path="res://entities/player/hurtbox.tscn" id="3_0yg16"]
+[ext_resource type="PackedScene" uid="uid://ba77waqioqmfu" path="res://entities/player/abilities/platelets.tscn" id="3_ew1x4"]
 [ext_resource type="Texture2D" uid="uid://b8v7nq0db5eeo" path="res://entities/player/playerv2.png" id="4_8gkul"]
 [ext_resource type="Script" path="res://components/abilities/dash_ability.gd" id="5_d1tlo"]
 [ext_resource type="PackedScene" uid="uid://cpcto8eyq00ad" path="res://components/abilities/shield_ability.tscn" id="6_kjbor"]
@@ -58,6 +59,7 @@ player_data = ExtResource("2_o06pk")
 texture = NodePath("texture")
 hitbox = NodePath("collision_box")
 analyzation_area = NodePath("analyzation_area")
+platelet_scene = ExtResource("3_ew1x4")
 friction = 850.0
 
 [node name="hurtbox" parent="." instance=ExtResource("3_0yg16")]
