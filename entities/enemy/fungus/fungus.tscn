@@ -17,7 +17,6 @@
 radius = 8.0
 
 [node name="Fungus" instance=ExtResource("1_al264")]
-collision_layer = 2
 script = ExtResource("2_6c30x")
 hover_distance = 300.0
 lifespan = 100000.0

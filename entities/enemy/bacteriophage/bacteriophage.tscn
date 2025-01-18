@@ -1,0 +1,83 @@
+[gd_scene load_steps=18 format=3 uid="uid://d3y3ftfcfme0y"]
+
+[ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_hk2lw"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteriophage.gd" id="2_gyehl"]
+[ext_resource type="Texture2D" uid="uid://dx8ym7xl7w8it" path="res://assets/sprites/enemies/enemy_bacteriophage.png" id="3_2u8po"]
+[ext_resource type="Texture2D" uid="uid://cb2qexqg5suco" path="res://assets/test_square_1.png" id="4_3yy0t"]
+[ext_resource type="PackedScene" uid="uid://cigjl4cj7ivhl" path="res://components/movements/tracking_movement.tscn" id="4_qg6o7"]
+[ext_resource type="PackedScene" uid="uid://b5eeywolxp5f6" path="res://components/utilities/spawner.tscn" id="5_h28i4"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_init_state.gd" id="6_bx8m4"]
+[ext_resource type="PackedScene" uid="uid://djm3wowsocey2" path="res://entities/attacks/missile_attack.tscn" id="6_qhhlp"]
+[ext_resource type="Script" path="res://components/state machine/state_machine.gd" id="6_sqlti"]
+[ext_resource type="PackedScene" uid="uid://dp826dsx2nu3d" path="res://components/movements/rotation.tscn" id="7_1viqo"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_chase_state.gd" id="7_5h1mx"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_hover_state.gd" id="8_ptnqp"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_escape_state.gd" id="9_s64x8"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_windup_phase.gd" id="14_nj8ap"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_attack_state.gd" id="15_3i4ci"]
+[ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteria_cooldown_state.gd" id="16_u4q21"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_br05j"]
+radius = 6.0
+height = 58.0
+
+[node name="Bacteriophage" instance=ExtResource("1_hk2lw")]
+script = ExtResource("2_gyehl")
+far_speed = 50
+near_speed = 100
+hover_range = Vector2(100, 150)
+lifespan = 120.0
+max_speed = 75.0
+homing_speed = 10000.0
+friction = 0.32
+
+[node name="Hitbox" parent="." index="1"]
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_br05j")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_2u8po")
+offset = Vector2(0, -26.47)
+hframes = 7
+vframes = 2
+
+[node name="Target" type="Node2D" parent="." index="4"]
+visible = false
+top_level = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Target" index="0"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_3yy0t")
+
+[node name="Spawner" parent="." index="5" instance=ExtResource("5_h28i4")]
+scene = ExtResource("6_qhhlp")
+
+[node name="Rotator" parent="Spawner" index="1" instance=ExtResource("7_1viqo")]
+rps = 1.0
+
+[node name="TrackingMovement" parent="." index="6" node_paths=PackedStringArray("target") instance=ExtResource("4_qg6o7")]
+target = NodePath("../Target")
+
+[node name="StateMachine" type="Node" parent="." index="7"]
+script = ExtResource("6_sqlti")
+
+[node name="Init" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("6_bx8m4")
+
+[node name="Chase" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("7_5h1mx")
+
+[node name="Hover" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("8_ptnqp")
+
+[node name="Escape" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("9_s64x8")
+
+[node name="Windup" type="Node" parent="StateMachine" index="4"]
+script = ExtResource("14_nj8ap")
+
+[node name="Attack" type="Node" parent="StateMachine" index="5"]
+script = ExtResource("15_3i4ci")
+
+[node name="Cooldown" type="Node" parent="StateMachine" index="6"]
+script = ExtResource("16_u4q21")
