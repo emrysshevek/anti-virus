@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtbym2480qf5v"]
+
+[ext_resource type="Texture2D" uid="uid://d0nvdgi3enfno" path="res://assets/shield_01.png" id="1_d2tl6"]
+[ext_resource type="Script" path="res://entities/pickups/upgrades/upgrade.gd" id="1_o6vxr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3jfi"]
+
+[node name="Upgrade" type="Area2D"]
+script = ExtResource("1_o6vxr")
+
+[node name="texture" type="Sprite2D" parent="."]
+modulate = Color(1, 0.156863, 1, 1)
+texture_filter = 1
+scale = Vector2(0.648279, 0.65)
+texture = ExtResource("1_d2tl6")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n3jfi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

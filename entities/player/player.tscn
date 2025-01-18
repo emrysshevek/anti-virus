@@ -71,7 +71,7 @@ texture = ExtResource("4_8gkul")
 hframes = 4
 
 [node name="collision_box" type="CollisionShape2D" parent="."]
-scale = Vector2(0.14, 0.14)
+scale = Vector2(0.12, 0.12)
 shape = SubResource("CircleShape2D_ddd3e")
 
 [node name="player_animation" type="AnimationPlayer" parent="."]
@@ -96,8 +96,6 @@ one_shot = true
 script = ExtResource("5_d1tlo")
 
 [node name="ShieldAbility" parent="." instance=ExtResource("6_kjbor")]
-shield_cooldown = null
-is_unlocked = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="analyzation_area" to="." method="_on_analyzation_area_body_entered"]
