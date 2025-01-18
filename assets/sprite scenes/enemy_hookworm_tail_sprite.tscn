@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckkpy2ap8scui"]
+
+[ext_resource type="Texture2D" uid="uid://cn8d31gt3vtwc" path="res://assets/sprites/enemies/enemy_hookworm.png" id="1_qd0nf"]
+
+[node name="hookworm_tail_sprite" type="Sprite2D"]
+texture = ExtResource("1_qd0nf")
+offset = Vector2(8, 0)
+hframes = 3
+frame = 2
