@@ -1,13 +1,13 @@
 class_name MissileAttack
-extends Enemy
+extends Projectile
 
 
 func _physics_process(delta: float) -> void:
 
-    if lifespan - lifespan_timer.time_left >= .5:
+    if duration - timer.time_left >= .5:
         _detect_collision()
 
-    if lifespan_timer.time_left <= 2.5:
+    if timer.time_left <= 2.5:
         max_speed *= .99
 
     move_and_slide()    
