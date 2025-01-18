@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfj08sttvpoon"]
+
+[ext_resource type="Script" path="res://entities/pickups/upgrades/upgrade.gd" id="1_b5cvu"]
+[ext_resource type="Texture2D" uid="uid://d0nvdgi3enfno" path="res://assets/shield_01.png" id="2_i101o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3jfi"]
+
+[node name="Dash_Upgrade" type="Area2D" node_paths=PackedStringArray("texture")]
+script = ExtResource("1_b5cvu")
+upgrade_name = 1
+texture = NodePath("texture")
+
+[node name="texture" type="Sprite2D" parent="."]
+modulate = Color(1, 0.156863, 1, 1)
+texture_filter = 1
+texture = ExtResource("2_i101o")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_n3jfi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

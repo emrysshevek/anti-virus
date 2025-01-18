@@ -25,6 +25,8 @@ const move_snap = 2
 @onready var analyzation_timer: Timer = $analyzation_area/analyzation_timer
 
 var input = Vector2.ZERO
+var platelet_instance : Platelets
+
 
 func _ready():
 	$player_animation.play("idle")
@@ -77,8 +79,8 @@ func player_movement(delta):
 		var dash_dir = input_dir if input_dir != Vector2.ZERO else velocity.normalized()
 		dash_ability.start_dash(dash_dir)
 	
-	if Input.is_action_just_pressed("shield"):
-		shield_ability.activate_shield()
+	#if Input.is_action_just_pressed("shield") and shield:
+	#	shield_ability.activate_shield()
 		
 	velocity = dash_ability.update_dash(delta,velocity)
 
@@ -119,11 +121,14 @@ func _on_analyzation_area_body_exited(body:Node2D) -> void:
 
 func aquire_platelet():
 	if not unlock_platelet:
-		var platelet = platelet_scene.instantiate()
-		add_child(platelet)
+		platelet_instance = platelet_scene.instantiate()
+		call_deferred("add_child", platelet_instance)
+		#add_child(platelet_instance)
 		print("You unlocked the platelet!")
 		unlock_platelet = true
-	else:
+	elif platelet_instance and unlock_platelet:
+		platelet_instance.call_deferred("pickup_platelets")
+		#platelet_instance.pickup_platelets()
 		print("You already unlocked the platelet!")
 
 func aquire_dash():

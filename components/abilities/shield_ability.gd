@@ -17,6 +17,10 @@ func _ready():
 	shield_shape.disabled = true
 	shield_art.visible = false
 
+func _process(_delta):
+	if Input.is_action_just_pressed("shield") and is_unlocked:
+		activate_shield()
+
 func _on_area_entered(area:Area2D):
 	if area is Attack:
 		print("you destroyed a projectile!")

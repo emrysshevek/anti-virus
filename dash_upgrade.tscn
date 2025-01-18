@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://wlmkt614g1yn"]
+
+[ext_resource type="Script" path="res://entities/pickups/upgrades/upgrade.gd" id="1_nptkc"]
+[ext_resource type="PackedScene" uid="uid://biogcsywuhh03" path="res://components/abilities/dash_ability.tscn" id="2_trn6b"]
+
+[node name="DashUpgrade" type="Area2D"]
+script = ExtResource("1_nptkc")
+upgrade_name = "dash"
+upgrade_type = ExtResource("2_trn6b")
