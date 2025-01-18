@@ -99,14 +99,15 @@ func die():
 	queue_free()
 
 func _on_analyzation_timer_timeout():
-	var overlapping_areas = analyzation_area.get_overlapping_areas()
-	for area in overlapping_areas:
-		if area is Enemy:
+	var overlapping = analyzation_area.get_overlapping_bodies()
+	for body in overlapping:
+		if body is Enemy:
 			#area.health -= int(player_damage)
-			area.take_damage(player_damage)
-			print(str(area.name) + "'s health is now " + str(area.health))
+			body.take_damage(player_damage)
+			print(str(body.name) + "'s health is now " + str(body.health))
 
 func _on_analyzation_area_body_entered(body:Node2D) -> void:
+	print(body)
 	if body.is_in_group("enemy"):
 		analyzation_timer.start()
 		print("Analyzing object: ", body.name)
