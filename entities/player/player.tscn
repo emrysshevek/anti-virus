@@ -50,6 +50,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0da72"]
+radius = 39.1152
 
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox", "analyzation_area") groups=["player"]]
 script = ExtResource("1_to4eo")
@@ -57,6 +58,7 @@ player_data = ExtResource("2_o06pk")
 texture = NodePath("texture")
 hitbox = NodePath("collision_box")
 analyzation_area = NodePath("analyzation_area")
+friction = 850.0
 
 [node name="hurtbox" parent="." instance=ExtResource("3_0yg16")]
 
@@ -77,11 +79,16 @@ libraries = {
 speed_scale = 0.7
 
 [node name="analyzation_area" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="analyzation_shape" type="CollisionShape2D" parent="analyzation_area"]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_0da72")
 debug_color = Color(0.314651, 0.622992, 0.174401, 0.42)
+
+[node name="analyzation_timer" type="Timer" parent="analyzation_area"]
+wait_time = 5.0
+one_shot = true
 
 [node name="DashAbility" type="Node" parent="."]
 script = ExtResource("5_d1tlo")
@@ -91,4 +98,6 @@ shield_cooldown = null
 is_unlocked = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="area_entered" from="analyzation_area" to="." method="_on_analyzation_area_area_entered"]
+[connection signal="body_entered" from="analyzation_area" to="." method="_on_analyzation_area_body_entered"]
+[connection signal="body_exited" from="analyzation_area" to="." method="_on_analyzation_area_body_exited"]
+[connection signal="timeout" from="analyzation_area/analyzation_timer" to="." method="_on_analyzation_timer_timeout"]
