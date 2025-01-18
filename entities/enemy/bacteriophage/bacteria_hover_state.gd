@@ -6,7 +6,6 @@ var timer: SceneTreeTimer
 
 func enter(_previous_state_path: String, _data := {}) -> void:
     player = get_tree().get_first_node_in_group("player")
-    bacteria.max_speed = bacteria.near_speed
     bacteria.moveable = true
 
     timer = get_tree().create_timer(10)
@@ -16,7 +15,9 @@ func exit() -> void:
     bacteria.moveable = false
     timer.timeout.disconnect(_on_timer_timeout)
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
+    bacteria.max_speed += (bacteria.near_speed - bacteria.max_speed) / 2 * delta
+
     var dist = player.global_position.distance_to(bacteria.global_position)
     if dist < bacteria.hover_range.x:
         finished.emit(ESCAPE)

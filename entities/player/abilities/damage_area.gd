@@ -1,13 +1,13 @@
 extends Area2D
 class_name DamageArea
 
-@export var damage: float = 50.0
+@export var damage: float = 3.0
 
 func _on_body_entered(body:Node2D):
-	if body is Projectile:
+	if body.is_in_group("enemy"):
 		print("Player entered DamageSquare!")
-		body.health -= damage
-		print(str(body.name) + " was hit by a platelet! Their health is now ${body.health}!")
+		body.take_damage(damage)
+		printt(body.name,"was hit by a platelet! Their health is now " + str(body.health) + "!")
 
 
 # func _on_area_entered(area:Area2D):

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://da4i4s1711r03"]
+[gd_scene load_steps=5 format=4 uid="uid://da4i4s1711r03"]
 
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="1_034a7"]
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="2_o5pfe"]
 [ext_resource type="PackedScene" uid="uid://d3y3ftfcfme0y" path="res://entities/enemy/bacteriophage/bacteriophage.tscn" id="3_m0dax"]
+[ext_resource type="PackedScene" uid="uid://bs5xxbng5t4f2" path="res://scenes/hud/hud.tscn" id="5_ovs87"]
 
 [node name="Battle" type="Node2D"]
 
@@ -22,3 +23,11 @@ position_smoothing_enabled = true
 
 [node name="Bacteriophage" parent="." instance=ExtResource("3_m0dax")]
 position = Vector2(176, 66)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("5_ovs87")]
+offset_left = 3.0
+offset_right = 3.0
+
+[editable path="player"]

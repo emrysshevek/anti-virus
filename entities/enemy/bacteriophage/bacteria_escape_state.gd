@@ -11,7 +11,9 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 func exit() -> void:
     bacteria.moveable = false
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
+    bacteria.max_speed += (bacteria.near_speed - bacteria.max_speed) / 2 * delta
+
     var dist = player.global_position.distance_to(bacteria.global_position)
     var midpoint = (bacteria.hover_range.x + bacteria.hover_range.y) / 2.0
     if dist > midpoint:
