@@ -7,6 +7,9 @@ extends Entity
 @export var hitbox: CollisionShape2D
 @export var analyzation_area: Area2D
 @export var player_damage: float = 5
+@export var platelet_scene: PackedScene
+
+var unlock_platelet: bool = false
 
 #character variables that are inherit to the player class
 var inventory: bool
@@ -35,9 +38,11 @@ func _ready():
 
 func _physics_process(delta):
 	player_movement(delta)
-	if Input.is_action_just_pressed("unlock") and not dash_ability.is_unlocked :
-		dash_ability.is_unlocked = true
-		print("you've unlocked the dash ability!")
+	if Input.is_action_just_pressed("unlock"):
+		aquire_dash()
+		aquire_platelet()
+		health += 1
+		
 	if Input.is_action_pressed("analyze"):
 		analyzation_area.monitoring = true
 	else: 
@@ -96,16 +101,34 @@ func die():
 func _on_analyzation_timer_timeout():
 	var overlapping_areas = analyzation_area.get_overlapping_areas()
 	for area in overlapping_areas:
-		if area is Projectile:
-			area.health -= int(player_damage)
+		if area is Enemy:
+			#area.health -= int(player_damage)
+			area.take_damage(player_damage)
 			print(str(area.name) + "'s health is now " + str(area.health))
 
 func _on_analyzation_area_body_entered(body:Node2D) -> void:
-	if body is Enemy:
+	if body.is_in_group("enemy"):
 		analyzation_timer.start()
 		print("Analyzing object: ", body.name)
 
 func _on_analyzation_area_body_exited(body:Node2D) -> void:
-	if body is Enemy:
+	if body.is_in_group("enemy"):
 		analyzation_timer.stop()
 		print("Stopped analyzing object: ", body.name)
+
+func aquire_platelet():
+	if not unlock_platelet:
+		var platelet = platelet_scene.instantiate()
+		add_child(platelet)
+		print("You unlocked the platelet!")
+		unlock_platelet = true
+	else:
+		print("You already unlocked the platelet!")
+
+func aquire_dash():
+	if not dash_ability.is_unlocked:
+		dash_ability.is_unlocked = true
+		print("you've unlocked the dash ability!")
+	else:
+		print("You already unlocked the dash ability!")
+	

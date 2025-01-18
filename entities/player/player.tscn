@@ -58,6 +58,7 @@ player_data = ExtResource("2_o06pk")
 texture = NodePath("texture")
 hitbox = NodePath("collision_box")
 analyzation_area = NodePath("analyzation_area")
+platelet_scene = ExtResource("7_yr7aq")
 friction = 850.0
 
 [node name="hurtbox" parent="." instance=ExtResource("3_0yg16")]
@@ -98,10 +99,6 @@ script = ExtResource("5_d1tlo")
 collision_layer = 1
 collision_mask = 1
 is_unlocked = true
-
-[node name="platelets" parent="." instance=ExtResource("7_yr7aq")]
-center = Vector2(0, 0)
-speed = 2.0
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="analyzation_area" to="." method="_on_analyzation_area_body_entered"]
