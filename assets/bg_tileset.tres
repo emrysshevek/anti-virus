@@ -1,0 +1,21 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bcwqj1lhkdaau"]
+
+[ext_resource type="Texture2D" uid="uid://c0vk08tpgdkwx" path="res://assets/bg_meat_tile.png" id="1_ql6cx"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4je8n"]
+texture = ExtResource("1_ql6cx")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+
+[resource]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Flesh"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/1 = SubResource("TileSetAtlasSource_4je8n")

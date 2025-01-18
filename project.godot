@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Anti Virus"
-run/main_scene="res://tester.tscn"
+run/main_scene="res://scenes/battle.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=384
-window/size/viewport_height=336
+window/size/viewport_width=768
+window/size/viewport_height=432
 window/size/mode=2
 window/stretch/mode="viewport"
 
@@ -30,6 +30,9 @@ project/assembly_name="Anti Virus"
 
 walls=""
 player=""
+enemy=""
+movement=""
+shield=""
 
 [input]
 
@@ -72,12 +75,28 @@ shield={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"location":0,"echo":false,"script":null)
 , null]
 }
+analyze={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":79,"key_label":0,"unicode":111,"location":0,"echo":false,"script":null)
+]
+}
+replicate={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
+]
+}
+dereplicate={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="item"
+2d_physics/layer_4="attack"
 
 [physics]
 
@@ -89,4 +108,4 @@ shield={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-2d/snap/snap_2d_transforms_to_pixel=true
+textures/default_filters/use_nearest_mipmap_filter=true

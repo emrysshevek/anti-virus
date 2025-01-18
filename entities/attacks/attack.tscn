@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c43n0osr7hqjb"]
+
+[ext_resource type="Script" path="res://entities/attacks/attack.gd" id="1_8pf43"]
+[ext_resource type="Texture2D" uid="uid://dhwe8i8tnp3e4" path="res://assets/sprites/enemies/enemy_viral_swarm.png" id="2_uns0l"]
+
+[node name="Attack" type="Area2D"]
+texture_filter = 3
+collision_layer = 8
+script = ExtResource("1_8pf43")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+top_level = true
+texture_filter = 3
+texture = ExtResource("2_uns0l")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Sprite2D")
+update_rotation = false
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

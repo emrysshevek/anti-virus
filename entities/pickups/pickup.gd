@@ -9,6 +9,6 @@ enum PickupType {
 
 var type: PickupType
 
-func pickup(player: Player) -> void:
+func pickup(_player: Player) -> void:
 	queue_free()
 

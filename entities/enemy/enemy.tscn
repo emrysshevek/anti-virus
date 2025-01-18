@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://m8xobidog0rl"]
+
+[ext_resource type="Script" path="res://entities/enemy/enemy.gd" id="1_ducmx"]
+[ext_resource type="Texture2D" uid="uid://dhwe8i8tnp3e4" path="res://assets/sprites/enemies/enemy_viral_swarm.png" id="2_6x7dl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jj237"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rmhnt"]
+radius = 4.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ducmx")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jj237")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6x7dl")
+
+[node name="Detection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+shape = SubResource("CircleShape2D_rmhnt")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

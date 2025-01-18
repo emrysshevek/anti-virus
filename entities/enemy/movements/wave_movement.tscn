@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctbr8isbdt0t3"]
-
-[ext_resource type="Script" path="res://entities/enemy/movements/wave_movement.gd" id="1_rbp1e"]
-
-[node name="WaveMovement" type="Node"]
-script = ExtResource("1_rbp1e")

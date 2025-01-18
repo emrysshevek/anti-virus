@@ -18,7 +18,7 @@ func _ready():
 	shield_art.visible = false
 
 func _on_area_entered(area:Area2D):
-	if area is Projectile:
+	if area is Attack:
 		print("you destroyed a projectile!")
 		area.queue_free()
 

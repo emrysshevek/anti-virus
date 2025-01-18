@@ -87,6 +87,7 @@ debug_color = Color(0.314651, 0.622992, 0.174401, 0.42)
 script = ExtResource("5_d1tlo")
 
 [node name="ShieldAbility" parent="." instance=ExtResource("6_kjbor")]
+shield_cooldown = null
 is_unlocked = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=14 format=3 uid="uid://diqfplhlircr0"]
+
+[ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_al264"]
+[ext_resource type="Script" path="res://entities/enemy/fungus/fungus.gd" id="2_6c30x"]
+[ext_resource type="Texture2D" uid="uid://c7hbx4iwrb0jd" path="res://icon.svg" id="2_i62jb"]
+[ext_resource type="Texture2D" uid="uid://4gmu6ba7rssy" path="res://assets/sprites/enemies/enemy_fungal_infector.png" id="3_fuu1n"]
+[ext_resource type="PackedScene" uid="uid://cigjl4cj7ivhl" path="res://components/movements/tracking_movement.tscn" id="4_p1jdp"]
+[ext_resource type="Script" path="res://components/state machine/state_machine.gd" id="6_80vo7"]
+[ext_resource type="Script" path="res://entities/enemy/fungus/fungus_move_state.gd" id="7_jumur"]
+[ext_resource type="Script" path="res://entities/enemy/fungus/fungus_windup_state.gd" id="8_sxr6k"]
+[ext_resource type="Script" path="res://entities/enemy/fungus/fungus_attack_state.gd" id="9_vd086"]
+[ext_resource type="PackedScene" uid="uid://b5eeywolxp5f6" path="res://components/utilities/spawner.tscn" id="10_1ph5d"]
+[ext_resource type="Script" path="res://entities/enemy/basic/basic_cooldown_state.gd" id="10_inmgy"]
+[ext_resource type="PackedScene" uid="uid://djm3wowsocey2" path="res://entities/attacks/missile_attack.tscn" id="11_6rcg5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8dt3"]
+radius = 8.0
+
+[node name="Fungus" instance=ExtResource("1_al264")]
+script = ExtResource("2_6c30x")
+hover_distance = 300.0
+lifespan = 100000.0
+reproduction_chance = 0.0
+reproduction_count = 0.0
+mutation_chance = 0.0
+max_speed = 50.0
+friction = 0.3
+
+[node name="Hitbox" parent="." index="1"]
+shape = SubResource("CircleShape2D_f8dt3")
+
+[node name="Sprite2D" parent="." index="2"]
+texture_filter = 3
+texture = ExtResource("3_fuu1n")
+hframes = 7
+
+[node name="Target" type="Node2D" parent="." index="4"]
+visible = false
+top_level = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Target" index="0"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_i62jb")
+
+[node name="TrackingMovement" parent="." index="5" node_paths=PackedStringArray("target") instance=ExtResource("4_p1jdp")]
+target = NodePath("../Target")
+
+[node name="StateMachine" type="Node" parent="." index="6"]
+script = ExtResource("6_80vo7")
+
+[node name="Move" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("7_jumur")
+
+[node name="Windup" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("8_sxr6k")
+
+[node name="Attack" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("9_vd086")
+
+[node name="Cooldown" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("10_inmgy")
+
+[node name="Spawner" parent="." index="7" instance=ExtResource("10_1ph5d")]
+scene = ExtResource("11_6rcg5")

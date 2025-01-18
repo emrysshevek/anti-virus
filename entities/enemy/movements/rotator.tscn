@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp826dsx2nu3d"]
-
-[ext_resource type="Script" path="res://entities/enemy/movements/rotator.gd" id="1_nyw1q"]
-
-[node name="Rotator" type="Node2D"]
-script = ExtResource("1_nyw1q")

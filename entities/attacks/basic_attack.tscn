@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3rqo2igt1cm0"]
+
+[ext_resource type="PackedScene" uid="uid://c43n0osr7hqjb" path="res://entities/attacks/attack.tscn" id="1_3x581"]
+[ext_resource type="Script" path="res://entities/attacks/basic_attack.gd" id="2_fdvp2"]
+
+[node name="BasicAttack" instance=ExtResource("1_3x581")]
+script = ExtResource("2_fdvp2")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = null

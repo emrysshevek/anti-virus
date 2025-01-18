@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://vy402sk3dca"]
+
+[ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_55y6o"]
+[ext_resource type="Script" path="res://entities/enemy/neurotoxin/neurotoxin.gd" id="2_nujps"]
+[ext_resource type="Texture2D" uid="uid://bvva0dtbo3fbc" path="res://assets/sprites/enemies/enemy_neurotoxic.png" id="2_yhhjk"]
+[ext_resource type="PackedScene" uid="uid://ctbr8isbdt0t3" path="res://components/movements/wave_movement.tscn" id="3_q256g"]
+[ext_resource type="PackedScene" uid="uid://cigjl4cj7ivhl" path="res://components/movements/tracking_movement.tscn" id="4_iq8ax"]
+[ext_resource type="PackedScene" uid="uid://dfjd32y5jo1w0" path="res://entities/attacks/freeze_attack.tscn" id="6_l2j78"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rmhnt"]
+radius = 15.0333
+
+[node name="Neurotoxin" instance=ExtResource("1_55y6o")]
+collision_layer = 2
+script = ExtResource("2_nujps")
+bubble_interval = Vector2(3, 3)
+lifespan = 30.0
+mutation_chance = 0.2
+
+[node name="Hitbox" parent="." index="1"]
+position = Vector2(0, -4)
+
+[node name="Sprite2D" parent="." index="2"]
+texture_filter = 3
+texture = ExtResource("2_yhhjk")
+hframes = 2
+
+[node name="Detection" parent="." index="3"]
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="Detection" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_rmhnt")
+
+[node name="TrackingMovement" parent="." index="4" instance=ExtResource("4_iq8ax")]
+
+[node name="WaveMovement" parent="." index="5" instance=ExtResource("3_q256g")]
+amplitude = 0.5
+frequency = 0.5
+
+[node name="BubbleTimer" type="Timer" parent="." index="6"]
+one_shot = true
+
+[node name="FreezeAttack" parent="." index="7" instance=ExtResource("6_l2j78")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeAttack" index="3"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_rmhnt")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="timeout" from="BubbleTimer" to="." method="_on_bubble_timer_timeout"]
+
+[editable path="FreezeAttack"]

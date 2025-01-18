@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqipnw8fkl0iy"]
+
+[ext_resource type="Texture2D" uid="uid://d0nvdgi3enfno" path="res://assets/shield_01.png" id="1_frnuy"]
+[ext_resource type="Script" path="res://entities/player/abilities/damage_area.gd" id="1_uncyg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sswj"]
+
+[node name="damage_area" type="Area2D"]
+collision_layer = 3
+collision_mask = 15
+script = ExtResource("1_uncyg")
+
+[node name="damage_box" type="CollisionShape2D" parent="."]
+z_index = 1
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_4sswj")
+
+[node name="Sprite2D" type="Sprite2D" parent="damage_box"]
+texture_filter = 1
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_frnuy")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
