@@ -22,9 +22,14 @@ func _process(_delta):
 		activate_shield()
 
 func _on_area_entered(area:Area2D):
-	if area is Attack:
-		print("you destroyed a projectile!")
-		area.queue_free()
+	if Globals.phase_one:
+		if area is Attack:
+			print("you destroyed a projectile!")
+			area.queue_free()
+	if Globals.phase_two:
+		if area.is_in_group("enemy"):
+			area.queue_free()
+			print("kill this dude")
 
 func activate_shield():
 	if not is_on_cooldown:
@@ -42,3 +47,10 @@ func deactivate_shield():
 
 func _on_shield_timer_timeout():
 	deactivate_shield()
+
+func _on_body_entered(body:Node2D):
+	if Globals.phase_two:
+		if body.is_in_group("enemy"):
+			#body.take_damage(8)
+			body.die()
+			printt(body.name,"BIG DAMAGE BABY! " + str(body.health) + "!")
