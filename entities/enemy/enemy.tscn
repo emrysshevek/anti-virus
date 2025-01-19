@@ -13,6 +13,22 @@ radius = 4.0
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_ducmx")
+lifespan = null
+reproduction_chance = null
+reproduction_count = null
+mutation_chance = null
+stamina = null
+variation = null
+max_analyzation_time = null
+type = null
+health = null
+power = null
+max_speed = null
+homing_speed = null
+rps = null
+moveable = null
+friction = null
+is_slowed = null
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

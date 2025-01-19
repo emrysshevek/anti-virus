@@ -35,7 +35,6 @@ shape = SubResource("CircleShape2D_rmhnt")
 [node name="TrackingMovement" parent="." index="4" instance=ExtResource("4_iq8ax")]
 
 [node name="WaveMovement" parent="." index="5" instance=ExtResource("3_q256g")]
-amplitude = 0.5
 frequency = 0.5
 
 [node name="BubbleTimer" type="Timer" parent="." index="6"]

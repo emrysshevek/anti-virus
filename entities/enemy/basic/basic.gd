@@ -1,13 +1,13 @@
 class_name Basic
 extends Enemy
 
-@export var max_count: int = 25
+@export var max_count: int = 10
 @export var health_range: Vector2 = Vector2(3, 15)
 @export var lifespan_range := Vector2(2, 30)
 @export var speed_range := Vector2(15, 50)
 @export var homing_range := Vector2(10, 100)
 @export var stamina_range := Vector2(.5, 5)
-@export var mutation_range := Vector2(0, .5)
+@export var mutation_range := Vector2(.1, .75)
 
 var movements = [
 	MovementWrapper.new("linear", "propulsion", preload("res://components/movements/linear_movement.tscn")),
@@ -16,13 +16,12 @@ var movements = [
 	MovementWrapper.new("rotate", "modifier", preload("res://components/movements/rotation.tscn")),
 ]
 
-
 var movement_propulsion: Movement
 var movement_modifiers: Array[Movement]
 
 @onready var personal_space: Area2D = $PersonalSpaceArea
 
-func init_child(child: Enemy) -> void:
+func init_child(child: Enemy) -> Enemy:
 	var basic = child as Basic
 	var time_weight := Globals.game_time_ratio()
 
@@ -34,43 +33,85 @@ func init_child(child: Enemy) -> void:
 	basic.mutation_chance = ((1 - time_weight) * mutation_range.x + time_weight * mutation_range.y) * randf_range(1-variation, 1+variation)
 
 	if randf() < mutation_chance:
-		basic.mutate()
+		child = basic.mutate()
 
-func mutate() -> void:
-	print("mutating cell")
+	return child
 
-	var rng = randf()
-	var type: String = "any"
+func mutate() -> Enemy:
+	var time = Globals.total_elapsed_time
 
-	if rng < .5:
-		type = _add_movement()
+	if time < 15:
+		return phase0_mutation()
+	elif time < 120:
+		return phase1_mutation()
+	elif time < 240:
+		return phase2_mutation()
+	elif time < 360:
+		return phase3_mutation()
 	else:
+		return phase1_mutation()
+		
+	return null
+
+func phase0_mutation() -> Enemy:
+	return self
+
+func phase1_mutation() -> Enemy:
+	var type: String = "any"
+	var rng = randf()
+	if rng < .33:
+		type = _add_movement()
+	elif rng < .66:
 		type = _swap_movement()
+	else:
+		return phase0_mutation()
 
 	if type != "any":
+		print("mutated cell")
 		_pack_self()
+	return self
 
-func _add_movement(type: String = "any") -> String:
-	var component_names = movement_modifiers.map(func(x): return x.movement_name)
+func phase2_mutation() -> Enemy:
+	if Globals.enemy_counts[Enemy.EnemyType.FUNGUS] <= 0:
+		return preload("res://entities/enemy/fungus/fungus.tscn").instantiate()
+	elif Globals.enemy_counts[Enemy.EnemyType.NEUROTOXIN] <= 0:
+		return preload("res://entities/enemy/neurotoxin/neurotoxin.tscn").instantiate()
 
-	var available_scenes = []
-	match type:
-		"modifier":
-			available_scenes.append_array(movements.filter(func(x): return x.type == "modifier" and x.name not in component_names))
-		"propulsion":
-			available_scenes.append_array(movements.filter(func(x): return x.type == "propulsion" and movement_propulsion == null or x.name != movement_propulsion.movement_name))
-		"any":
-			available_scenes.append_array(movements.filter(func(x): return x.type == "modifier" and x.name not in component_names))
-			available_scenes.append_array(movements.filter(func(x): return x.type == "propulsion" and (movement_propulsion == null or x.name != movement_propulsion.movement_name)))
+	return phase1_mutation()
 
-	if len(available_scenes) == 0:
-		return ""
+func phase3_mutation() -> Enemy:
+	if Globals.enemy_counts[Enemy.EnemyType.BACTERIA] <= 0:
+		return preload("res://entities/enemy/bacteriophage/bacteriophage.tscn").instantiate()
+	else:
+		return phase2_mutation()
 
-	if movement_propulsion == null:
-		available_scenes.append_array(movements.filter(func(x): return x.type == "propulsion"))
-	
-	var to_add = available_scenes.pick_random()
-	var movement: Movement = to_add.instantiate()
+func _add_movement(type: String = "any", component: Movement = null) -> String:
+	print("adding movement type: ", type, ", component=", component)
+	var movement: Movement
+
+	if component != null:
+		movement = component
+	else:
+		var component_names = movement_modifiers.map(func(x): return x.movement_name)
+
+		var available_scenes = []
+		match type:
+			"modifier":
+				available_scenes.append_array(movements.filter(func(x): return x.type == "modifier" and x.name not in component_names))
+			"propulsion":
+				if movement_propulsion == null:
+					available_scenes.append_array(movements.filter(func(x): return x.type == "propulsion"))
+			"any":
+				available_scenes.append_array(movements.filter(func(x): return x.type == "modifier" and x.name not in component_names))
+				if movement_propulsion == null:
+					available_scenes.append_array(movements.filter(func(x): return x.type == "propulsion"))
+		if len(available_scenes) == 0:
+			return ""
+
+		var to_add = available_scenes.pick_random()
+		movement = to_add.instantiate()
+
+
 	add_child(movement)
 
 	if movement.movement_type == "propulsion":
@@ -78,8 +119,8 @@ func _add_movement(type: String = "any") -> String:
 	else:
 		movement_modifiers.append(movement)
 
-	print("  added movement: ", to_add.name)
-	return to_add.type
+	print("  added movement: ", movement.movement_name, ", type: ", movement.movement_type)
+	return movement.movement_type
 
 func _remove_movement(type: String = "any") -> String:
 	var components: Array[Movement] = []
@@ -95,7 +136,7 @@ func _remove_movement(type: String = "any") -> String:
 			components.append_array(movement_modifiers)
 
 	if len(components) == 0:
-		return "any"
+		return type
 
 	var to_remove = components.pick_random()
 	to_remove.queue_free.call_deferred()
@@ -107,9 +148,9 @@ func _remove_movement(type: String = "any") -> String:
 	print("  removed movement: ", to_remove.name)
 	return to_remove.type
 
-func _swap_movement(type:="any") -> String:
+func _swap_movement(type:="any", component: Movement = null) -> String:
 	type = _remove_movement(type)
-	_add_movement(type)
+	_add_movement(type, component)
 
 	return type
 

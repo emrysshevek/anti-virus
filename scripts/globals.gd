@@ -12,20 +12,18 @@ var total_elapsed_time = 0.0
 var phase_elapsed_time = 0.0
 var enemy_counts = {}
 
-@onready var game_duration := phase_duration * 4
+@onready var game_duration := phase_duration * 3
 
 func _ready() -> void:
-    for key in Enemy.EnemyType.values():
-        enemy_counts[key] = 0
+	for key in Enemy.EnemyType.values():
+		enemy_counts[key] = 0
 
 func _physics_process(delta: float) -> void:
-    total_elapsed_time += delta
-    phase_elapsed_time += delta
+	total_elapsed_time += delta
+	phase_elapsed_time += delta
 
 func game_time_ratio() -> float:
-    return total_elapsed_time / game_duration
+	return total_elapsed_time / game_duration
 
 func phase_time_ratio() -> float:
-    return phase_elapsed_time / phase_duration
-
-
+	return phase_elapsed_time / phase_duration
