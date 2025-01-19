@@ -81,7 +81,8 @@ libraries = {
 speed_scale = 0.7
 
 [node name="analyzation_area" type="Area2D" parent="."]
-collision_mask = 2
+collision_layer = 15
+collision_mask = 15
 
 [node name="analyzation_shape" type="CollisionShape2D" parent="analyzation_area"]
 scale = Vector2(2, 2)
@@ -89,8 +90,21 @@ shape = SubResource("CircleShape2D_0da72")
 debug_color = Color(0.314651, 0.622992, 0.174401, 0.42)
 
 [node name="analyzation_timer" type="Timer" parent="analyzation_area"]
-wait_time = 5.0
-one_shot = true
+wait_time = 0.1
+autostart = true
+
+[node name="texture" type="Sprite2D" parent="analyzation_area"]
+modulate = Color(1, 1, 1, 0.462745)
+texture_filter = 1
+scale = Vector2(9.5, 9.5)
+texture = ExtResource("4_8gkul")
+hframes = 4
+
+[node name="analyze_animation" type="AnimationPlayer" parent="analyzation_area"]
+libraries = {
+"": SubResource("AnimationLibrary_ywmpe")
+}
+speed_scale = 0.7
 
 [node name="DashAbility" type="Node" parent="."]
 script = ExtResource("5_d1tlo")

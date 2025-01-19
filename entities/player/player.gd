@@ -30,6 +30,7 @@ var platelet_instance : Platelets
 
 func _ready():
 	$player_animation.play("idle")
+	$analyzation_area/analyze_animation.play("idle")
 	if player_data != null:
 		health = player_data.health
 		max_speed = player_data.speed * 20
@@ -43,11 +44,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("unlock"):
 		aquire_dash()
 		health += 1
-		
-	if Input.is_action_pressed("analyze"):
-		analyzation_area.monitoring = true
-	else: 
-		analyzation_area.monitoring = false
 
 func _process(_delta):
 	#give i frames to dash
@@ -102,10 +98,10 @@ func die():
 func _on_analyzation_timer_timeout():
 	var overlapping = analyzation_area.get_overlapping_bodies()
 	for body in overlapping:
-		if body is Enemy:
-			#area.health -= int(player_damage)
-			body.take_damage(player_damage)
-			print(str(body.name) + "'s health is now " + str(body.health))
+		if body.is_in_group("enemy"):
+			print("Player entered DamageSquare!")
+			body.analyze(1)
+			print("Analyzing ", body.name, ", current analyzation time: ", body.current_analyzation_time)	
 
 func _on_analyzation_area_body_entered(body:Node2D) -> void:
 	print(body)

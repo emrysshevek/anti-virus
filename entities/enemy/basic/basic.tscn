@@ -9,6 +9,7 @@
 
 [node name="Basic" instance=ExtResource("1_p25o1")]
 script = ExtResource("2_3dldj")
+max_analyzation_time = 20
 
 [node name="StateMachine" type="Node" parent="." index="3"]
 script = ExtResource("3_ubhpw")
@@ -22,3 +23,7 @@ script = ExtResource("5_8gmf4")
 [node name="Cooldown" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_akn60")
 cooldown_duration = 2.0
+
+[node name="Detection" parent="." index="4"]
+collision_layer = 7
+collision_mask = 15

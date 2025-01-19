@@ -8,6 +8,7 @@ var movements = [
 	MovementWrapper.new("rotate", "modifier", preload("res://components/movements/rotation.tscn")),
 ]
 
+
 var movement_propulsion: Movement
 var movement_modifiers: Array[Movement]
 
