@@ -35,8 +35,11 @@ var failsafe_color = Color.WHITE
 
 var target_position: Vector2
 var self_scene: PackedScene
+var instantiated := false
 
 @onready var lifespan_timer: Timer = $Timer
+@onready var onscreen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+@onready var detection_area: Area2D = $Detection
 
 func _ready() -> void:
 	print("Spawned ", str(type))
@@ -46,7 +49,7 @@ func _ready() -> void:
 	lifespan_timer.start()
 
 	Globals.enemy_counts[type] += 1
-
+	
 func _physics_process(delta: float) -> void:
 	if is_frozen or is_slowed:
 		if is_frozen:
@@ -59,20 +62,34 @@ func _physics_process(delta: float) -> void:
 				$Sprite2D.modulate = old_color
 		elif is_slowed:
 			$Sprite2D.modulate = old_color
+			
 	else:
-		for area in $Detection.get_overlapping_areas():
-			if area.get_parent().is_in_group("enemy"):
-				global_position += area.global_position.direction_to(global_position)
+		if detection_area.monitoring:
+			for area in $Detection.get_overlapping_areas():
+				if area.get_parent().is_in_group("enemy"):
+					global_position += area.global_position.direction_to(global_position)
 
-		move_and_slide()
+	for body in $DamageArea.get_overlapping_bodies():
+		if body is Player:
+			body.take_damage(1)
 
 	if not is_frozen and not is_slowed:
 		$Sprite2D.modulate = failsafe_color 
 		
 	if current_analyzation_time >= max_analyzation_time:
-		die()
+		kill()
+	
+	move_and_slide()
 
 func _process(_delta):
+	if instantiated and not onscreen_notifier.is_on_screen():
+		print("somehow got offscreen")
+		die()
+
+	if not instantiated:
+		print("instantiated")
+		instantiated = true
+
 	if current_analyzation_time >= max_analyzation_time:
 		queue_free()
 
@@ -150,7 +167,7 @@ func _reproduce() -> void:
 	var parent = get_parent()
 	for i in round(reproduction_count):
 		var child = clone()
-		init_child(child)
+		child = init_child(child)
 
 		parent.add_child(child)
 		print("reproduced child")
@@ -159,11 +176,12 @@ func _reproduce() -> void:
 
 		reproduced.emit(child)
 
-func init_child(child: Enemy) -> void:
-	pass
+func init_child(child: Enemy) -> Enemy:
+	return
 
-func mutate() -> void:
+func mutate() -> Enemy:
 	mutated.emit()
+	return
 
 func die() -> void:
 	print("died")
@@ -182,3 +200,4 @@ func _on_timer_timeout() -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	print("enemy died offscreen")
 	die()
+

@@ -9,6 +9,21 @@ shader = ExtResource("1_yigam")
 shader_parameter/flash_color = Color(0.976471, 0.956863, 0.956863, 1)
 shader_parameter/flash_strength = 0.0
 
+[sub_resource type="Animation" id="Animation_udbx8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_n7yqr"]
 resource_name = "idle"
 length = 1.33335
@@ -27,21 +42,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_udbx8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p5lx4"]
 _data = {
 "RESET": SubResource("Animation_udbx8"),
@@ -57,3 +57,4 @@ hframes = 8
 libraries = {
 "": SubResource("AnimationLibrary_p5lx4")
 }
+autoplay = "idle"

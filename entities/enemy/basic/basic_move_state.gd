@@ -27,12 +27,15 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 
 	var dir = center.direction_to(entity.global_position)
 
-	# entity.look_at(entity.global_position + dir)
 	entity.rotation_degrees = (rad_to_deg(entity.get_angle_to(center)) + 180) + randf_range(-5, 5)
 	entity.moveable = true
+	entity.detection_area.monitorable = false
+	entity.detection_area.monitoring = false
 
 func exit() -> void:
 	entity.moveable = false
+	entity.detection_area.monitorable = true
+	entity.detection_area.monitoring = true
 
 func _on_timer_timeout() -> void:
 	if randf() < .5:

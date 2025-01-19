@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://diqfplhlircr0"]
+[gd_scene load_steps=18 format=3 uid="uid://diqfplhlircr0"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_al264"]
 [ext_resource type="Script" path="res://entities/enemy/fungus/fungus.gd" id="2_6c30x"]
@@ -12,8 +12,19 @@
 [ext_resource type="PackedScene" uid="uid://b5eeywolxp5f6" path="res://components/utilities/spawner.tscn" id="10_1ph5d"]
 [ext_resource type="Script" path="res://entities/enemy/basic/basic_cooldown_state.gd" id="10_inmgy"]
 [ext_resource type="PackedScene" uid="uid://djm3wowsocey2" path="res://entities/attacks/missile_attack.tscn" id="11_6rcg5"]
+[ext_resource type="PackedScene" uid="uid://cv3bxe05gb50u" path="res://assets/sprite scenes/enemy_fungal_infector_sprite.tscn" id="13_5qekk"]
+[ext_resource type="Shader" uid="uid://kq680m0ajmsa" path="res://shaders/shader_hit_flash.tres" id="14_sol43"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8dt3"]
+radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_da8ho"]
+resource_local_to_scene = true
+shader = ExtResource("14_sol43")
+shader_parameter/flash_color = Color(0.976471, 0.956863, 0.956863, 1)
+shader_parameter/flash_strength = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2esk5"]
 radius = 8.0
 
 [node name="Fungus" instance=ExtResource("1_al264")]
@@ -31,9 +42,14 @@ friction = 0.3
 shape = SubResource("CircleShape2D_f8dt3")
 
 [node name="Sprite2D" parent="." index="2"]
+visible = false
 texture_filter = 3
 texture = ExtResource("3_fuu1n")
 hframes = 7
+
+[node name="Detection" parent="." index="3"]
+monitoring = false
+monitorable = false
 
 [node name="Target" type="Node2D" parent="." index="4"]
 visible = false
@@ -63,3 +79,9 @@ script = ExtResource("10_inmgy")
 
 [node name="Spawner" parent="." index="7" instance=ExtResource("10_1ph5d")]
 scene = ExtResource("11_6rcg5")
+
+[node name="fungal_infector_sprite" parent="." index="9" instance=ExtResource("13_5qekk")]
+material = SubResource("ShaderMaterial_da8ho")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+shape = SubResource("CircleShape2D_2esk5")

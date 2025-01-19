@@ -4,3 +4,4 @@
 
 [node name="Globals" type="Node"]
 script = ExtResource("1_xabik")
+phase_duration = 60.0

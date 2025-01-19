@@ -4,6 +4,8 @@ extends Entity
 signal hit(entity: Node2D)
 signal destroyed()
 
+var current_analyzation_time
+
 @export var duration := 10
 
 @onready var timer = $Timer
@@ -19,6 +21,15 @@ func destroy() -> void:
 func _process(_delta):
 	if health <= 0:
 		destroy()
+
+func analyze(_value):
+	return
+
+func slow(_val):
+	return
+
+func freeze(_val):
+	return
 
 func _on_body_entered(body:Node2D) -> void:
 	

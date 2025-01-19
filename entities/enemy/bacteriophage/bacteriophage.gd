@@ -7,3 +7,4 @@ extends Enemy
 
 @onready var target: Node2D = $Target
 @onready var spawner: Spawner = $Spawner
+@onready var ap: AnimationPlayer = $bacteriophage_sprite/AnimationPlayer

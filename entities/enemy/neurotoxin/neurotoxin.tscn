@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vy402sk3dca"]
+[gd_scene load_steps=12 format=3 uid="uid://vy402sk3dca"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_55y6o"]
 [ext_resource type="Script" path="res://entities/enemy/neurotoxin/neurotoxin.gd" id="2_nujps"]
@@ -6,27 +6,44 @@
 [ext_resource type="PackedScene" uid="uid://ctbr8isbdt0t3" path="res://components/movements/wave_movement.tscn" id="3_q256g"]
 [ext_resource type="PackedScene" uid="uid://cigjl4cj7ivhl" path="res://components/movements/tracking_movement.tscn" id="4_iq8ax"]
 [ext_resource type="PackedScene" uid="uid://dfjd32y5jo1w0" path="res://entities/attacks/freeze_attack.tscn" id="6_l2j78"]
+[ext_resource type="PackedScene" uid="uid://g5vy731w3a4q" path="res://assets/sprite scenes/enemy_neurotoxic_sprite.tscn" id="7_peeyk"]
+[ext_resource type="Shader" uid="uid://kq680m0ajmsa" path="res://shaders/shader_hit_flash.tres" id="8_7j058"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rmhnt"]
 radius = 15.0333
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p8m3j"]
+resource_local_to_scene = true
+shader = ExtResource("8_7j058")
+shader_parameter/flash_color = Color(0.976471, 0.956863, 0.956863, 1)
+shader_parameter/flash_strength = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4w60g"]
+radius = 15.0
+
 [node name="Neurotoxin" instance=ExtResource("1_55y6o")]
 script = ExtResource("2_nujps")
 bubble_interval = Vector2(3, 3)
-lifespan = 30.0
+lifespan = 30000.0
+reproduction_chance = 0.1
 mutation_chance = 0.2
 type = 3
+max_speed = 25.0
+homing_speed = 15.0
 
 [node name="Hitbox" parent="." index="1"]
 position = Vector2(0, -4)
 
 [node name="Sprite2D" parent="." index="2"]
+visible = false
 texture_filter = 3
 texture = ExtResource("2_yhhjk")
 hframes = 2
 
 [node name="Detection" parent="." index="3"]
 collision_mask = 3
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" parent="Detection" index="0"]
 position = Vector2(0, -4)
@@ -35,7 +52,6 @@ shape = SubResource("CircleShape2D_rmhnt")
 [node name="TrackingMovement" parent="." index="4" instance=ExtResource("4_iq8ax")]
 
 [node name="WaveMovement" parent="." index="5" instance=ExtResource("3_q256g")]
-amplitude = 0.5
 frequency = 0.5
 
 [node name="BubbleTimer" type="Timer" parent="." index="6"]
@@ -47,7 +63,13 @@ one_shot = true
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_rmhnt")
 
+[node name="neurotoxic_sprite" parent="." index="9" instance=ExtResource("7_peeyk")]
+material = SubResource("ShaderMaterial_p8m3j")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_4w60g")
+
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
-[connection signal="timeout" from="BubbleTimer" to="." method="_on_bubble_timer_timeout"]
 
 [editable path="FreezeAttack"]

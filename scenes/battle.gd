@@ -1,9 +1,11 @@
-extends Node2D
 class_name Battle
+extends Node2D
 
 @export var upgrade_scene: PackedScene 
 @export var spawn_area_width: float = 800.0
 @export var spawn_area_height: float = 600.0
+
+var elapsed := 0.0
 
 # Reference to the Timer node
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -11,6 +13,18 @@ class_name Battle
 func _ready():
 	randomize()
 	spawn_timer.start()
+
+func _process(delta: float) -> void:
+	elapsed += delta
+
+	if elapsed >= 2:
+		elapsed = 0.0
+
+		add_child(preload("res://entities/enemy/basic/basic.tscn").instantiate())
+
+	if Globals.phase_two == true and len(get_tree().get_nodes_in_group("enemy")) == 0:
+		Globals.won = true
+		get_tree().change_scene_to_file("res://scenes/result_screen.tscn")
 
 
 func _on_spawn_timer_timeout():
