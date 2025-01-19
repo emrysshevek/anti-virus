@@ -11,6 +11,7 @@ var phase_two: bool = false
 var total_elapsed_time = 0.0
 var phase_elapsed_time = 0.0
 var enemy_counts = {}
+var won: bool = false
 
 @onready var game_duration := phase_duration * 3
 

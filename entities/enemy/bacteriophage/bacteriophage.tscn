@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d3y3ftfcfme0y"]
+[gd_scene load_steps=22 format=3 uid="uid://d3y3ftfcfme0y"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_hk2lw"]
 [ext_resource type="Script" path="res://entities/enemy/bacteriophage/bacteriophage.gd" id="2_gyehl"]
@@ -29,6 +29,10 @@ shader = ExtResource("5_em61u")
 shader_parameter/flash_color = Color(0.976471, 0.956863, 0.956863, 1)
 shader_parameter/flash_strength = 0.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfbdf"]
+radius = 6.0
+height = 60.0
+
 [node name="Bacteriophage" instance=ExtResource("1_hk2lw")]
 script = ExtResource("2_gyehl")
 far_speed = 50
@@ -37,7 +41,7 @@ hover_range = Vector2(100, 150)
 lifespan = 120.0
 max_analyzation_time = 10
 type = 4
-max_speed = 75.0
+max_speed = 150.0
 homing_speed = 500.0
 friction = 0.32
 
@@ -55,6 +59,10 @@ vframes = 2
 [node name="bacteriophage_sprite" parent="." index="3" instance=ExtResource("4_ycsa6")]
 material = SubResource("ShaderMaterial_6g6at")
 offset = Vector2(0, -29.675)
+
+[node name="Detection" parent="." index="4"]
+monitoring = false
+monitorable = false
 
 [node name="Target" type="Node2D" parent="." index="5"]
 visible = false
@@ -96,3 +104,7 @@ script = ExtResource("15_3i4ci")
 
 [node name="Cooldown" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("16_u4q21")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_lfbdf")

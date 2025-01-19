@@ -42,11 +42,11 @@ func mutate() -> Enemy:
 
 	if time < 15:
 		return phase0_mutation()
-	elif time < 120:
+	elif time < 60:
 		return phase1_mutation()
-	elif time < 240:
+	elif time < 120:
 		return phase2_mutation()
-	elif time < 360:
+	elif time < 180:
 		return phase3_mutation()
 	else:
 		return phase1_mutation()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://diqfplhlircr0"]
+[gd_scene load_steps=18 format=3 uid="uid://diqfplhlircr0"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_al264"]
 [ext_resource type="Script" path="res://entities/enemy/fungus/fungus.gd" id="2_6c30x"]
@@ -24,6 +24,9 @@ shader = ExtResource("14_sol43")
 shader_parameter/flash_color = Color(0.976471, 0.956863, 0.956863, 1)
 shader_parameter/flash_strength = 0.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2esk5"]
+radius = 8.0
+
 [node name="Fungus" instance=ExtResource("1_al264")]
 script = ExtResource("2_6c30x")
 hover_distance = 300.0
@@ -43,6 +46,10 @@ visible = false
 texture_filter = 3
 texture = ExtResource("3_fuu1n")
 hframes = 7
+
+[node name="Detection" parent="." index="3"]
+monitoring = false
+monitorable = false
 
 [node name="Target" type="Node2D" parent="." index="4"]
 visible = false
@@ -73,5 +80,8 @@ script = ExtResource("10_inmgy")
 [node name="Spawner" parent="." index="7" instance=ExtResource("10_1ph5d")]
 scene = ExtResource("11_6rcg5")
 
-[node name="fungal_infector_sprite" parent="." index="10" instance=ExtResource("13_5qekk")]
+[node name="fungal_infector_sprite" parent="." index="9" instance=ExtResource("13_5qekk")]
 material = SubResource("ShaderMaterial_da8ho")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+shape = SubResource("CircleShape2D_2esk5")

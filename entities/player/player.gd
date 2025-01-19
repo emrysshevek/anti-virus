@@ -15,6 +15,7 @@ extends Entity
 
 var unlock_platelet: bool = false
 var shot_lvl = 0
+var on_screen := true
 
 #character variables that are inherit to the player class
 var inventory: bool
@@ -51,6 +52,10 @@ func _ready():
 
 func _physics_process(delta):
 	i_time -= delta
+
+	if not on_screen:
+		take_damage(1)
+
 	player_movement(delta)
 	if Input.is_action_just_pressed("unlock"):
 		aquire_dash()
@@ -109,6 +114,7 @@ func take_damage(damage):
 		i_time = 1
 
 func die():
+	get_tree().change_scene_to_file("res://scenes/result_screen.tscn")
 	queue_free()
 
 
@@ -213,3 +219,11 @@ func boost_shot():
 func aquire_slow():
 	slowing_area.visible = true
 	slowing_area.monitoring = true
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	on_screen = true
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	on_screen = false

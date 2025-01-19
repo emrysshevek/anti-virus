@@ -12,6 +12,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var time_weight = Globals.game_time_ratio()
+	if time_weight > 1:
+		zoom = Vector2(zoom_range.y, zoom_range.y)
 	var steps = time_weight * max_steps
 	var new_zoom = zoom_range.x * (step_size ** Globals.total_elapsed_time)
 	zoom = Vector2(new_zoom, new_zoom)

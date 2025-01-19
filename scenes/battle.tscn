@@ -30,20 +30,19 @@ ignore_rotation = false
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 script = ExtResource("3_x6cwa")
-zoom_range = Vector2(1.5, 0.5)
-
-[node name="player2" parent="." instance=ExtResource("2_o5pfe")]
-slow_rate = 1000.0
+zoom_range = Vector2(1.5, 0.75)
 
 [node name="Objects" type="Node" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 10.0
 
 [node name="Upgrades" type="Node" parent="."]
 
 [node name="Upgrade" parent="Upgrades" instance=ExtResource("3_wxytq")]
 position = Vector2(7, 22)
 upgrade_name = 9
+
+[node name="player" parent="." instance=ExtResource("2_o5pfe")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

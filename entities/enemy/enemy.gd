@@ -68,11 +68,10 @@ func _physics_process(delta: float) -> void:
 			for area in $Detection.get_overlapping_areas():
 				if area.get_parent().is_in_group("enemy"):
 					global_position += area.global_position.direction_to(global_position)
-		for body in $DamageArea.get_overlapping_bodies():
-			if body is Player:
-				body.take_damage(1)
 
-		move_and_slide()
+	for body in $DamageArea.get_overlapping_bodies():
+		if body is Player:
+			body.take_damage(1)
 
 	if not is_frozen and not is_slowed:
 		$Sprite2D.modulate = failsafe_color 

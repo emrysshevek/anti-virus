@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vy402sk3dca"]
+[gd_scene load_steps=12 format=3 uid="uid://vy402sk3dca"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_55y6o"]
 [ext_resource type="Script" path="res://entities/enemy/neurotoxin/neurotoxin.gd" id="2_nujps"]
@@ -17,6 +17,9 @@ resource_local_to_scene = true
 shader = ExtResource("8_7j058")
 shader_parameter/flash_color = Color(0.976471, 0.956863, 0.956863, 1)
 shader_parameter/flash_strength = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4w60g"]
+radius = 15.0
 
 [node name="Neurotoxin" instance=ExtResource("1_55y6o")]
 script = ExtResource("2_nujps")
@@ -39,6 +42,8 @@ hframes = 2
 
 [node name="Detection" parent="." index="3"]
 collision_mask = 3
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" parent="Detection" index="0"]
 position = Vector2(0, -4)
@@ -58,10 +63,13 @@ one_shot = true
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_rmhnt")
 
-[node name="neurotoxic_sprite" parent="." index="10" instance=ExtResource("7_peeyk")]
+[node name="neurotoxic_sprite" parent="." index="9" instance=ExtResource("7_peeyk")]
 material = SubResource("ShaderMaterial_p8m3j")
 
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_4w60g")
+
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
-[connection signal="timeout" from="BubbleTimer" to="." method="_on_bubble_timer_timeout"]
 
 [editable path="FreezeAttack"]
