@@ -24,6 +24,12 @@ enum EnemyType {
 @export var variation: float = .1
 @export var max_analyzation_time: int = 100
 var current_analyzation_time: int = 0
+var is_frozen: bool = false
+var freeze_time_left: float = 0.0
+
+var old_max_speed: float = 0.0
+var old_color: Color = Color.WHITE
+var failsafe_color = Color.WHITE
 
 @export var type: EnemyType
 
@@ -42,14 +48,26 @@ func _ready() -> void:
 	Globals.enemy_counts[type] += 1
 
 func _physics_process(delta: float) -> void:
+	if is_frozen:
+		lifespan_timer.paused = true
+		freeze_time_left -= delta
+		if freeze_time_left <= 0.0:
+			is_frozen = false
+			max_speed = old_max_speed
+			lifespan_timer.paused = false
+			$Sprite2D.modulate = old_color
+	else:
+		for area in $Detection.get_overlapping_areas():
+			if area.get_parent().is_in_group("enemy"):
+				global_position += area.global_position.direction_to(global_position)
+
+		move_and_slide()
+
+	if not is_frozen:
+		$Sprite2D.modulate = failsafe_color 
+		
 	if current_analyzation_time >= max_analyzation_time:
 		die()
-		
-	for area in $Detection.get_overlapping_areas():
-		if area.get_parent().is_in_group("enemy"):
-			global_position += area.global_position.direction_to(global_position)
-
-	move_and_slide()
 
 func _process(_delta):
 	if current_analyzation_time >= max_analyzation_time:
@@ -91,6 +109,16 @@ func slow(rate:float):
 	elif is_slowed:
 		max_speed = temp_speed
 		is_slowed = false
+
+func freeze(duration: float) -> void:
+	if not is_frozen:
+		is_frozen = true
+		freeze_time_left = duration
+		old_max_speed = max_speed
+		old_color = $Sprite2D.modulate
+		$Sprite2D.modulate = Color(0,0,1)
+		max_speed = 0.0
+		print("Enemy frozen for ", duration, " seconds.") 
 
 func kill() -> void:
 	if randf() < .2:

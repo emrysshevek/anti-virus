@@ -6,8 +6,8 @@ extends Node
 
 @export var current_phase = 1
 
-var phase_one: bool = false
-var phase_two: bool = true
+var phase_one: bool = true
+var phase_two: bool = false
 var total_elapsed_time = 0.0
 var phase_elapsed_time = 0.0
 var enemy_counts = {}
