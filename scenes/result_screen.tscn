@@ -1,0 +1,184 @@
+[gd_scene load_steps=9 format=3 uid="uid://btab5np7k2kbn"]
+
+[ext_resource type="Texture2D" uid="uid://x7o0qrj67cb4" path="res://assets/initbg2.png" id="1_d5chx"]
+[ext_resource type="Script" path="res://scenes/result_screen.gd" id="1_u6yu7"]
+[ext_resource type="Texture2D" uid="uid://cnyvny0l4vdys" path="res://assets/test_square_2.png" id="2_13tba"]
+[ext_resource type="Texture2D" uid="uid://byaqnli4wmt74" path="res://assets/initbg3.png" id="4_1jah5"]
+[ext_resource type="AudioStream" uid="uid://b64iekf2kijds" path="res://audio/sfx/sfx_menu_hover.ogg" id="4_idnav"]
+[ext_resource type="AudioStream" uid="uid://ciyhm421hmyq5" path="res://audio/sfx/sfx_menu_select.ogg" id="5_i1gws"]
+[ext_resource type="AudioStream" uid="uid://bc3mclxbp88ly" path="res://audio/Final-Theme-Loop-F.ogg" id="7_xapge"]
+[ext_resource type="AudioStream" uid="uid://bbdlvpw7a75q6" path="res://audio/Bullet-Hell-Loop-F.ogg" id="8_n0yuo"]
+
+[node name="ResultScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u6yu7")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(384, 216)
+texture = ExtResource("1_d5chx")
+
+[node name="WinScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="WinScreen"]
+modulate = Color(1, 0.843137, 0, 1)
+position = Vector2(384, 216)
+texture = ExtResource("4_1jah5")
+
+[node name="Control" type="Control" parent="WinScreen"]
+custom_minimum_size = Vector2(340, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -40.0
+offset_right = 140.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="WinScreen/Control"]
+modulate = Color(1, 0.843137, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_13tba")
+expand_mode = 3
+
+[node name="TitleLabel" type="Label" parent="WinScreen/Control"]
+custom_minimum_size = Vector2(260, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = -4.0
+offset_right = 134.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "You Won!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="WinScreen/Control"]
+custom_minimum_size = Vector2(260, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 52.0
+offset_right = 162.0
+offset_bottom = 135.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Thank you for playing!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoseScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="LoseScreen"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, 216)
+texture = ExtResource("4_1jah5")
+
+[node name="Control" type="Control" parent="LoseScreen"]
+custom_minimum_size = Vector2(340, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -40.0
+offset_right = 140.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="LoseScreen/Control"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(260, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = -4.0
+offset_right = 134.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="."]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 350.0
+offset_right = 190.0
+offset_bottom = 381.0
+text = "Play Again?"
+
+[node name="MainMenuButton" type="Button" parent="."]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 578.0
+offset_top = 350.0
+offset_right = 718.0
+offset_bottom = 381.0
+text = "Back to Main"
+
+[node name="SfxMenuHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_idnav")
+bus = &"SFX"
+
+[node name="SfxMenuSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_i1gws")
+bus = &"SFX"
+
+[node name="FinalTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xapge")
+pitch_scale = 1.25
+bus = &"Background Music"
+parameters/looping = true
+
+[node name="HellTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_n0yuo")
+pitch_scale = 0.27
+bus = &"Background Music"
+parameters/looping = true
+
+[connection signal="mouse_entered" from="PlayAgainButton" to="." method="_on_play_again_button_mouse_entered"]
+[connection signal="pressed" from="PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="mouse_entered" from="MainMenuButton" to="." method="_on_main_menu_button_mouse_entered"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
