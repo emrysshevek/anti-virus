@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://da4i4s1711r03"]
+[gd_scene load_steps=7 format=4 uid="uid://da4i4s1711r03"]
 
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="1_034a7"]
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="2_o5pfe"]
+[ext_resource type="PackedScene" uid="uid://dtbym2480qf5v" path="res://entities/pickups/upgrades/upgrade.tscn" id="3_wxytq"]
 [ext_resource type="Script" path="res://scenes/battle_camera.gd" id="3_x6cwa"]
 [ext_resource type="PackedScene" uid="uid://bs5xxbng5t4f2" path="res://scenes/hud/hud.tscn" id="5_ovs87"]
 [ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="6_fccbe"]
@@ -38,7 +39,7 @@ offset_right = 3.0
 scale = Vector2(1.02166, 1)
 
 [node name="Basic" parent="." instance=ExtResource("6_fccbe")]
-position = Vector2(4, 1)
+position = Vector2(-56, 18)
 speed_range = Vector2(15, 75)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -47,5 +48,19 @@ zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 script = ExtResource("3_x6cwa")
 zoom_range = Vector2(4, 1)
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="Upgrade" parent="Objects" instance=ExtResource("3_wxytq")]
+position = Vector2(-25, 33)
+upgrade_name = 5
+
+[node name="Upgrade2" parent="Objects" instance=ExtResource("3_wxytq")]
+position = Vector2(-5, 33)
+upgrade_name = 5
+
+[node name="Upgrade3" parent="Objects" instance=ExtResource("3_wxytq")]
+position = Vector2(-25, 20)
+upgrade_name = 5
 
 [editable path="player"]
