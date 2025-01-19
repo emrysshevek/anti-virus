@@ -28,11 +28,10 @@ position = Vector2(19, -14)
 slow_rate = 1000.0
 
 [node name="slow_area" parent="player" index="4"]
-scale = Vector2(0.35, 0.35)
+scale = Vector2(0.3, 0.3)
 
 [node name="analyzation_area" parent="player" index="5"]
-scale = Vector2(0.335, 0.335)
-monitoring = false
+scale = Vector2(0.29, 0.29)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
