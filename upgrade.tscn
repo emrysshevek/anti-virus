@@ -5,8 +5,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3jfi"]
 
-[node name="Upgrade" type="Area2D"]
+[node name="Upgrade" type="Area2D" node_paths=PackedStringArray("texture")]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_o6vxr")
+texture = NodePath("texture")
 
 [node name="texture" type="Sprite2D" parent="."]
 modulate = Color(1, 0.156863, 1, 1)

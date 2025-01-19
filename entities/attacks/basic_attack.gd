@@ -9,4 +9,3 @@ func _activate_attack(body: Node2D) -> void:
 	var player = body as Player
 	player.take_damage(1)
 	hit.emit(player)
-	destroy()

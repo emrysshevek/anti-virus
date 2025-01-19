@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs5xxbng5t4f2"]
+[gd_scene load_steps=7 format=3 uid="uid://bs5xxbng5t4f2"]
 
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_at4yj"]
+[ext_resource type="AudioStream" uid="uid://r5221hirkp36" path="res://audio/Bullet-Heaven-Loop-F.ogg" id="2_62is6"]
+[ext_resource type="AudioStream" uid="uid://bbdlvpw7a75q6" path="res://audio/Bullet-Hell-Loop-F.ogg" id="3_5drti"]
+[ext_resource type="AudioStream" uid="uid://bc3mclxbp88ly" path="res://audio/Final-Theme-Loop-F.ogg" id="4_g68c7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky80u"]
 bg_color = Color(0, 0, 0, 1)
@@ -26,6 +29,7 @@ offset_bottom = 23.0
 text = "Heath: XXX"
 
 [node name="Time" type="Label" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 144.0
@@ -50,3 +54,18 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ky80u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xe8lp")
 step = 1.0
 show_percentage = false
+
+[node name="BHEAVEN" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_62is6")
+bus = &"Background Music"
+parameters/looping = true
+
+[node name="BHELL" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5drti")
+bus = &"Background Music"
+parameters/looping = true
+
+[node name="FINAL" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_g68c7")
+bus = &"Background Music"
+parameters/looping = true

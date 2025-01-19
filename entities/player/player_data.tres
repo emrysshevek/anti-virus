@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_te8bt")
-health = 22
+health = 5
 speed = 6
 power = 6
 inventory = false

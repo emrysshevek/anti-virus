@@ -13,22 +13,6 @@ radius = 4.0
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_ducmx")
-lifespan = null
-reproduction_chance = null
-reproduction_count = null
-mutation_chance = null
-stamina = null
-variation = null
-max_analyzation_time = null
-type = null
-health = null
-power = null
-max_speed = null
-homing_speed = null
-rps = null
-moveable = null
-friction = null
-is_slowed = null
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -47,6 +31,11 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_rmhnt")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

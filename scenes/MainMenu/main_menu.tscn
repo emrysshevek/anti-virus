@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://x7o0qrj67cb4" path="res://assets/initbg2.png" id="1_2x0eb"]
 [ext_resource type="Script" path="res://scenes/MainMenu/main_menu.gd" id="1_pdhih"]
-[ext_resource type="AudioStream" uid="uid://b64iekf2kijds" path="res://sfx/sfx_menu_hover.ogg" id="3_2p6ce"]
-[ext_resource type="AudioStream" uid="uid://ciyhm421hmyq5" path="res://sfx/sfx_menu_select.ogg" id="4_63eu0"]
-[ext_resource type="AudioStream" uid="uid://c1gl584krpty1" path="res://sfx/Main-Menu-Loop-F.ogg" id="5_l3np6"]
+[ext_resource type="AudioStream" uid="uid://b64iekf2kijds" path="res://audio/sfx/sfx_menu_hover.ogg" id="3_2p6ce"]
+[ext_resource type="AudioStream" uid="uid://ciyhm421hmyq5" path="res://audio/sfx/sfx_menu_select.ogg" id="4_63eu0"]
+[ext_resource type="AudioStream" uid="uid://c1gl584krpty1" path="res://audio/sfx/Main-Menu-Loop-F.ogg" id="5_l3np6"]
 [ext_resource type="Texture2D" uid="uid://cnyvny0l4vdys" path="res://assets/test_square_2.png" id="6_6rans"]
 
 [node name="MainMenu" type="Control"]

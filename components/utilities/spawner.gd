@@ -9,8 +9,9 @@ func spawn(count: int = 1, delay: float = 0.0, parent: Node = null) -> void:
 		if parent:
 			parent.add_child(instance)
 		else:
-			get_parent().add_child(instance)
-		# instance.global_position = global_position
+			get_parent().get_parent().add_child(instance)
+
 		instance.transform = transform
+		instance.global_position = global_position
 
 		await get_tree().create_timer(delay).timeout

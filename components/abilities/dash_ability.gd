@@ -2,8 +2,8 @@ extends Node
 class_name DashAbility
 
 @export var dash_speed = 300
-@export var dash_time = 0.5
-@export var dash_cooldown = 3.0
+@export var dash_time = 0.0005
+@export var dash_cooldown = 1.0
 @export var is_unlocked = false
 
 

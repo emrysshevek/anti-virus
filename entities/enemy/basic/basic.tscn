@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://demaoybjk1shm"]
+[gd_scene load_steps=9 format=3 uid="uid://demaoybjk1shm"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_p25o1"]
 [ext_resource type="Script" path="res://entities/enemy/basic/basic.gd" id="2_3dldj"]
@@ -10,15 +10,18 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ta1fy"]
 radius = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ce0f"]
+radius = 0.0
+
 [node name="Basic" instance=ExtResource("1_p25o1")]
 script = ExtResource("2_3dldj")
-max_count = null
-health_range = null
-lifespan_range = null
+max_count = 10
+health_range = Vector2(3, 15)
+lifespan_range = Vector2(2, 30)
 speed_range = Vector2(25, 75)
-homing_range = null
-stamina_range = null
-mutation_range = null
+homing_range = Vector2(10, 100)
+stamina_range = Vector2(0.5, 5)
+mutation_range = Vector2(0.1, 0.75)
 lifespan = 2.0
 mutation_chance = 0.25
 stamina = 0.1
@@ -56,3 +59,6 @@ shape = SubResource("CircleShape2D_ta1fy")
 [node name="VisibleOnScreenNotifier2D" parent="." index="6"]
 position = Vector2(9.53674e-07, 9.53674e-07)
 scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+shape = SubResource("CircleShape2D_3ce0f")

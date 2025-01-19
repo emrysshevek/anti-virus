@@ -59,3 +59,5 @@ func recalculate_platelets():
     for i in range(damage_areas.size()):
         var area_data = damage_areas[i]
         area_data["angle"] = i * (2.0 * PI / number_of_nodes)
+func boost_speed():
+    speed *= 1.05

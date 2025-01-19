@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3rqo2igt1cm0"]
+[gd_scene load_steps=4 format=3 uid="uid://d3rqo2igt1cm0"]
 
 [ext_resource type="PackedScene" uid="uid://c43n0osr7hqjb" path="res://entities/attacks/attack.tscn" id="1_3x581"]
 [ext_resource type="Script" path="res://entities/attacks/basic_attack.gd" id="2_fdvp2"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6jn03"]
+radius = 6.0
+
 [node name="BasicAttack" instance=ExtResource("1_3x581")]
 script = ExtResource("2_fdvp2")
+health = 1000000000000000000
+duration = 1e+09
 
 [node name="Sprite2D" parent="." index="0"]
 texture = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_6jn03")
