@@ -61,6 +61,7 @@ hitbox = NodePath("collision_box")
 analyzation_area = NodePath("analyzation_area")
 slowing_area = NodePath("slow_area")
 platelet_scene = ExtResource("3_ew1x4")
+slow_rate = 100.0
 friction = 850.0
 
 [node name="hurtbox" parent="." instance=ExtResource("3_0yg16")]

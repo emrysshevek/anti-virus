@@ -9,8 +9,11 @@ extends Entity
 @export var slowing_area: Area2D
 @export var player_damage: float = 5
 @export var platelet_scene: PackedScene
+@export var max_upgrades: Array = [false, false, false, false]
+@export var slow_rate = 2.0
 
 var unlock_platelet: bool = false
+
 
 #character variables that are inherit to the player class
 var inventory: bool
@@ -98,14 +101,8 @@ func take_damage(damage):
 func die():
 	queue_free()
 
-func _on_analyzation_timer_timeout():
-	var overlapping = analyzation_area.get_overlapping_bodies()
-	for body in overlapping:
-		if body.is_in_group("enemy"):
-			print("Player entered DamageSquare!")
-			body.analyze(1)
-			print("Analyzing ", body.name, ", current analyzation time: ", body.current_analyzation_time)	
 
+#Analyzation Area
 func _on_analyzation_area_body_entered(body:Node2D) -> void:
 	print(body)
 	if body.is_in_group("enemy"):
@@ -116,6 +113,15 @@ func _on_analyzation_area_body_exited(body:Node2D) -> void:
 	if body.is_in_group("enemy"):
 		analyzation_timer.stop()
 		print("Stopped analyzing object: ", body.name)
+
+func _on_analyzation_timer_timeout():
+	var overlapping = analyzation_area.get_overlapping_bodies()
+	for body in overlapping:
+		if body.is_in_group("enemy"):
+			print("Player entered DamageSquare!")
+			body.analyze(1)
+			print("Analyzing ", body.name, ", current analyzation time: ", body.current_analyzation_time)	
+#End Analyzation Area
 
 func aquire_platelet():
 	if not unlock_platelet:
@@ -136,23 +142,13 @@ func aquire_dash():
 	else:
 		print("You already unlocked the dash ability!")
 
-
-func _on_slow_area_body_exited(body:Node2D):
-	if body.is_in_group("enemy"):
-		slow_timer.stop()
-		print(str(body.name) + " exited the slowing range")
-
 func _on_slow_area_body_entered(body:Node2D):
 	print(body)
 	if body.is_in_group("enemy"):
-		slow_timer.start()
+		body.slow(slow_rate)
 		print(str(body.name) + " entered the slowing range")
 
-
-func _on_slow_timer_timeout():
-	var overlapping = slowing_area.get_overlapping_bodies()
-	for body in overlapping:
-		if body.is_in_group("enemy"):
-			print("Player entered DamageSquare!")
-			body.analyze(1)
-			print("Analyzing ", body.name, ", current analyzation time: ", body.current_analyzation_time)	
+func _on_slow_area_body_exited(body:Node2D):
+	if body.is_in_group("enemy"):
+		body.slow(slow_rate)
+		print(str(body.name) + " exited the slowing range")

@@ -22,6 +22,7 @@ tile_set = ExtResource("1_034a7")
 position_smoothing_enabled = true
 
 [node name="player" parent="." instance=ExtResource("2_o5pfe")]
+slow_rate = 1000.0
 
 [node name="Bacteriophage" parent="." instance=ExtResource("3_m0dax")]
 position = Vector2(176, 66)

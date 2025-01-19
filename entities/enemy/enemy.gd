@@ -43,7 +43,6 @@ func _process(_delta):
 	if current_analyzation_time >= max_analyzation_time:
 		queue_free()
 
-
 func print_stats() -> void:
 	print("lifespan: ", lifespan, ", repro chance: ", reproduction_chance, ", repro count: ", reproduction_chance, "mutate chance: ", mutation_chance, ", health: ", health, ", max_speed: ", max_speed, ", turn max_speed: ", homing_speed, ", power: ", power)
 
@@ -73,7 +72,15 @@ func analyze(percentage: int):
 	if current_analyzation_time >= max_analyzation_time:
 		die() 
 
-	
+func slow(rate:float):
+	if not is_slowed:
+		is_slowed = true
+		temp_speed = max_speed
+		max_speed /= rate
+	elif is_slowed:
+		max_speed = temp_speed
+		is_slowed = false
+
 func kill() -> void:
 	if randf() < .2:
 		var pickup: Pickup = preload("res://entities/pickups/pickup.tscn").instantiate()
