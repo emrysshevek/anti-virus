@@ -14,7 +14,7 @@ extends Entity
 @export var bullet_scene: PackedScene
 
 var unlock_platelet: bool = false
-
+var shot_lvl = 0
 
 #character variables that are inherit to the player class
 var inventory: bool
@@ -44,15 +44,18 @@ func _ready():
 		power = player_data.power
 		position = player_data.position
 		analyzation_timer.stop()
+		slowing_area.visible = false
+		slowing_area.monitoring = false
 	print("health: ", health, " speed: ", player_data.speed, " power: ", power)
 
 func _physics_process(delta):
 	player_movement(delta)
 	if Input.is_action_just_pressed("unlock"):
 		aquire_dash()
-		shot_time.wait_time *= 0.95
+		aquire_shot()
+		#shot_time.wait_time *= 0.95
 		print(shot_time.wait_time)
-		health += 1
+		#health += 1
 
 func _process(_delta):
 	#give i frames to dash
@@ -138,6 +141,13 @@ func aquire_platelet():
 		#platelet_instance.pickup_platelets()
 		print("You already unlocked the platelet!")
 
+func increase_platelet_speed():
+	if not platelet_instance:
+		print("No platelet instance available!")
+		return
+	platelet_instance.boost_speed()
+	print("All platelets' speed increased by 5%")
+
 func aquire_dash():
 	if not dash_ability.is_unlocked:
 		dash_ability.is_unlocked = true
@@ -157,15 +167,23 @@ func _on_slow_area_body_exited(body:Node2D):
 		print(str(body.name) + " exited the slowing range")
 
 func _on_shot_timer_timeout():
-	spawn_projectile(Vector2(0, -1))  # Up/North
-	spawn_projectile(Vector2(0, 1))  # Down/South
-	spawn_projectile(Vector2(1, 0))  # Right/East
-	spawn_projectile(Vector2(-1, 0))  # Left/West
 
-	spawn_projectile(Vector2(1, -1))  # NE
-	spawn_projectile(Vector2(1, 1))  # SE
-	spawn_projectile(Vector2(-1, -1))  # NW
-	spawn_projectile(Vector2(-1, 1))  # SW
+	if shot_lvl > 0:
+		spawn_projectile(Vector2(0, -1))  # Up/North
+	if shot_lvl > 1:
+		spawn_projectile(Vector2(0, 1))  # Down/South
+	if shot_lvl > 2: 
+		spawn_projectile(Vector2(1, 0))  # Right/East
+	if shot_lvl > 3:
+		spawn_projectile(Vector2(-1, 0))  # Left/West
+	if shot_lvl > 4:
+		spawn_projectile(Vector2(1, -1))  # NE
+	if shot_lvl > 5:
+		spawn_projectile(Vector2(1, 1))  # SE
+	if shot_lvl > 6:
+		spawn_projectile(Vector2(-1, -1))  # NW
+	if shot_lvl > 7:
+		spawn_projectile(Vector2(-1, 1))  # SW
 
 func spawn_projectile(direction: Vector2):
 	if bullet_scene:
@@ -180,3 +198,14 @@ func spawn_projectile(direction: Vector2):
 		proj.direction = direction.normalized()
 	else:
 		print("No projectile_scene assigned!")
+
+func aquire_shot():
+		shot_time.start()
+		shot_lvl += 1
+		
+func boost_shot():
+	shot_time.wait_time *= 0.95
+
+func aquire_slow():
+	slowing_area.visible = true
+	slowing_area.monitoring = true

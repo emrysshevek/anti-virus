@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=4 uid="uid://da4i4s1711r03"]
+[gd_scene load_steps=8 format=4 uid="uid://da4i4s1711r03"]
 
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="1_034a7"]
+[ext_resource type="Script" path="res://scenes/battle.gd" id="1_vixip"]
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="2_o5pfe"]
-[ext_resource type="PackedScene" uid="uid://dtbym2480qf5v" path="res://entities/pickups/upgrades/upgrade.tscn" id="3_wxytq"]
+[ext_resource type="PackedScene" uid="uid://dtbym2480qf5v" path="res://upgrade.tscn" id="3_wxytq"]
 [ext_resource type="Script" path="res://scenes/battle_camera.gd" id="3_x6cwa"]
 [ext_resource type="PackedScene" uid="uid://bs5xxbng5t4f2" path="res://scenes/hud/hud.tscn" id="5_ovs87"]
 [ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="6_fccbe"]
 
 [node name="Battle" type="Node2D"]
+script = ExtResource("1_vixip")
+upgrade_scene = ExtResource("3_wxytq")
+spawn_area_width = 100.0
+spawn_area_height = 100.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -23,11 +28,9 @@ position = Vector2(19, -14)
 slow_rate = 1000.0
 
 [node name="slow_area" parent="player" index="4"]
-visible = false
-monitoring = false
+scale = Vector2(0.35, 0.35)
 
 [node name="analyzation_area" parent="player" index="5"]
-visible = false
 scale = Vector2(0.335, 0.335)
 monitoring = false
 
@@ -51,16 +54,15 @@ zoom_range = Vector2(4, 1)
 
 [node name="Objects" type="Node" parent="."]
 
-[node name="Upgrade" parent="Objects" instance=ExtResource("3_wxytq")]
-position = Vector2(-25, 33)
-upgrade_name = 5
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
 
-[node name="Upgrade2" parent="Objects" instance=ExtResource("3_wxytq")]
-position = Vector2(-5, 33)
-upgrade_name = 5
+[node name="Upgrades" type="Node" parent="."]
 
-[node name="Upgrade3" parent="Objects" instance=ExtResource("3_wxytq")]
-position = Vector2(-25, 20)
-upgrade_name = 5
+[node name="Upgrade" parent="Upgrades" instance=ExtResource("3_wxytq")]
+position = Vector2(7, 22)
+upgrade_name = 9
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 
 [editable path="player"]
