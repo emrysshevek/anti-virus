@@ -105,6 +105,7 @@ func take_damage(damage):
 	super.take_damage(1)
 
 func die():
+	get_tree().change_scene_to_file("res://scenes/result_screen.tscn")
 	queue_free()
 
 
