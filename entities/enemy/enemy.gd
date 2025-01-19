@@ -48,13 +48,16 @@ func _ready() -> void:
 	Globals.enemy_counts[type] += 1
 
 func _physics_process(delta: float) -> void:
-	if is_frozen:
-		lifespan_timer.paused = true
-		freeze_time_left -= delta
-		if freeze_time_left <= 0.0:
-			is_frozen = false
-			max_speed = old_max_speed
-			lifespan_timer.paused = false
+	if is_frozen or is_slowed:
+		if is_frozen:
+			lifespan_timer.paused = true
+			freeze_time_left -= delta
+			if freeze_time_left <= 0.0:
+				is_frozen = false
+				max_speed = old_max_speed
+				lifespan_timer.paused = false
+				$Sprite2D.modulate = old_color
+		elif is_slowed:
 			$Sprite2D.modulate = old_color
 	else:
 		for area in $Detection.get_overlapping_areas():
@@ -63,7 +66,7 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
-	if not is_frozen:
+	if not is_frozen and not is_slowed:
 		$Sprite2D.modulate = failsafe_color 
 		
 	if current_analyzation_time >= max_analyzation_time:
@@ -106,6 +109,8 @@ func slow(rate:float):
 		is_slowed = true
 		temp_speed = max_speed
 		max_speed /= rate
+		old_color = $Sprite2D.modulate
+		$Sprite2D.modulate = Color.ALICE_BLUE
 	elif is_slowed:
 		max_speed = temp_speed
 		is_slowed = false
