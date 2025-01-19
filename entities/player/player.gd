@@ -6,6 +6,7 @@ extends Entity
 @export var texture: Sprite2D
 @export var hitbox: CollisionShape2D
 @export var analyzation_area: Area2D
+@export var slowing_area: Area2D
 @export var player_damage: float = 5
 @export var platelet_scene: PackedScene
 
@@ -23,6 +24,7 @@ const move_snap = 2
 @onready var dash_ability: DashAbility = $DashAbility
 @onready var shield_ability: ShieldAbility = $ShieldAbility
 @onready var analyzation_timer: Timer = $analyzation_area/analyzation_timer
+@onready var slow_timer: Timer = $slow_area/slow_timer
 
 var input = Vector2.ZERO
 var platelet_instance : Platelets
@@ -133,11 +135,24 @@ func aquire_dash():
 		print("you've unlocked the dash ability!")
 	else:
 		print("You already unlocked the dash ability!")
-	
 
 
 func _on_slow_area_body_exited(body:Node2D):
-	pass # Replace with function body.
+	if body.is_in_group("enemy"):
+		slow_timer.stop()
+		print(str(body.name) + " exited the slowing range")
 
 func _on_slow_area_body_entered(body:Node2D):
-	pass # Replace with function body.
+	print(body)
+	if body.is_in_group("enemy"):
+		slow_timer.start()
+		print(str(body.name) + " entered the slowing range")
+
+
+func _on_slow_timer_timeout():
+	var overlapping = slowing_area.get_overlapping_bodies()
+	for body in overlapping:
+		if body.is_in_group("enemy"):
+			print("Player entered DamageSquare!")
+			body.analyze(1)
+			print("Analyzing ", body.name, ", current analyzation time: ", body.current_analyzation_time)	

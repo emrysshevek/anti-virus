@@ -53,12 +53,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_0da72"]
 radius = 39.1152
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox", "analyzation_area") groups=["player"]]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "hitbox", "analyzation_area", "slowing_area") groups=["player"]]
 script = ExtResource("1_to4eo")
 player_data = ExtResource("2_o06pk")
 texture = NodePath("texture")
 hitbox = NodePath("collision_box")
 analyzation_area = NodePath("analyzation_area")
+slowing_area = NodePath("slow_area")
 platelet_scene = ExtResource("3_ew1x4")
 friction = 850.0
 
@@ -140,9 +141,9 @@ script = ExtResource("5_d1tlo")
 is_unlocked = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="body_entered" from="slow_area" to="." method="_on_analyzation_area_body_entered"]
-[connection signal="body_exited" from="slow_area" to="." method="_on_analyzation_area_body_exited"]
-[connection signal="timeout" from="slow_area/slow_timer" to="." method="_on_analyzation_timer_timeout"]
+[connection signal="body_entered" from="slow_area" to="." method="_on_slow_area_body_entered"]
+[connection signal="body_exited" from="slow_area" to="." method="_on_slow_area_body_exited"]
+[connection signal="timeout" from="slow_area/slow_timer" to="." method="_on_slow_timer_timeout"]
 [connection signal="body_entered" from="analyzation_area" to="." method="_on_analyzation_area_body_entered"]
 [connection signal="body_exited" from="analyzation_area" to="." method="_on_analyzation_area_body_exited"]
 [connection signal="timeout" from="analyzation_area/analyzation_timer" to="." method="_on_analyzation_timer_timeout"]
