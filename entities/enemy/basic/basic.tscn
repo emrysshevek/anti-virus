@@ -23,6 +23,7 @@ mutation_range = Vector2(0, 0.5)
 lifespan = 2.0
 mutation_chance = 0.0
 stamina = 0.1
+max_analyzation_time = 20
 health = 3.0
 power = 1.0
 max_speed = 25.0
@@ -41,6 +42,10 @@ script = ExtResource("5_8gmf4")
 [node name="Cooldown" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_akn60")
 cooldown_duration = 2.0
+
+[node name="Detection" parent="." index="4"]
+collision_layer = 7
+collision_mask = 15
 
 [node name="PersonalSpaceArea" type="Area2D" parent="." index="5"]
 collision_layer = 0

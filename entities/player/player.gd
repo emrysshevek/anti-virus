@@ -6,10 +6,14 @@ extends Entity
 @export var texture: Sprite2D
 @export var hitbox: CollisionShape2D
 @export var analyzation_area: Area2D
+@export var slowing_area: Area2D
 @export var player_damage: float = 5
 @export var platelet_scene: PackedScene
+@export var max_upgrades: Array = [false, false, false, false]
+@export var slow_rate = 2.0
 
 var unlock_platelet: bool = false
+
 
 #character variables that are inherit to the player class
 var inventory: bool
@@ -23,6 +27,7 @@ const move_snap = 2
 @onready var dash_ability: DashAbility = $DashAbility
 @onready var shield_ability: ShieldAbility = $ShieldAbility
 @onready var analyzation_timer: Timer = $analyzation_area/analyzation_timer
+@onready var slow_timer: Timer = $slow_area/slow_timer
 
 var input = Vector2.ZERO
 var platelet_instance : Platelets
@@ -30,6 +35,8 @@ var platelet_instance : Platelets
 
 func _ready():
 	$player_animation.play("idle")
+	$analyzation_area/analyze_animation.play("idle")
+	$slow_area/slow_animation.play("idle")
 	if player_data != null:
 		health = player_data.health
 		max_speed = player_data.speed * 20
@@ -42,13 +49,7 @@ func _physics_process(delta):
 	player_movement(delta)
 	if Input.is_action_just_pressed("unlock"):
 		aquire_dash()
-		aquire_platelet()
 		health += 1
-		
-	if Input.is_action_pressed("analyze"):
-		analyzation_area.monitoring = true
-	else: 
-		analyzation_area.monitoring = false
 
 func _process(_delta):
 	#give i frames to dash
@@ -100,14 +101,8 @@ func take_damage(damage):
 func die():
 	queue_free()
 
-func _on_analyzation_timer_timeout():
-	var overlapping = analyzation_area.get_overlapping_bodies()
-	for body in overlapping:
-		if body is Enemy:
-			#area.health -= int(player_damage)
-			body.take_damage(player_damage)
-			print(str(body.name) + "'s health is now " + str(body.health))
 
+#Analyzation Area
 func _on_analyzation_area_body_entered(body:Node2D) -> void:
 	print(body)
 	if body.is_in_group("enemy"):
@@ -118,6 +113,15 @@ func _on_analyzation_area_body_exited(body:Node2D) -> void:
 	if body.is_in_group("enemy"):
 		analyzation_timer.stop()
 		print("Stopped analyzing object: ", body.name)
+
+func _on_analyzation_timer_timeout():
+	var overlapping = analyzation_area.get_overlapping_bodies()
+	for body in overlapping:
+		if body.is_in_group("enemy"):
+			print("Player entered DamageSquare!")
+			body.analyze(1)
+			print("Analyzing ", body.name, ", current analyzation time: ", body.current_analyzation_time)	
+#End Analyzation Area
 
 func aquire_platelet():
 	if not unlock_platelet:
@@ -137,4 +141,14 @@ func aquire_dash():
 		print("you've unlocked the dash ability!")
 	else:
 		print("You already unlocked the dash ability!")
-	
+
+func _on_slow_area_body_entered(body:Node2D):
+	print(body)
+	if body.is_in_group("enemy"):
+		body.slow(slow_rate)
+		print(str(body.name) + " entered the slowing range")
+
+func _on_slow_area_body_exited(body:Node2D):
+	if body.is_in_group("enemy"):
+		body.slow(slow_rate)
+		print(str(body.name) + " exited the slowing range")

@@ -22,6 +22,8 @@ enum EnemyType {
 
 @export var stamina: float = .5
 @export var variation: float = .1
+@export var max_analyzation_time: int = 100
+var current_analyzation_time: int = 0
 
 @export var type: EnemyType
 
@@ -40,11 +42,18 @@ func _ready() -> void:
 	Globals.enemy_counts[type] += 1
 
 func _physics_process(delta: float) -> void:
+	if current_analyzation_time >= max_analyzation_time:
+		die()
+		
 	for area in $Detection.get_overlapping_areas():
 		if area.get_parent().is_in_group("enemy"):
 			global_position += area.global_position.direction_to(global_position)
 
 	move_and_slide()
+
+func _process(_delta):
+	if current_analyzation_time >= max_analyzation_time:
+		queue_free()
 
 func print_stats() -> void:
 	print("lifespan: ", lifespan, ", repro chance: ", reproduction_chance, ", repro count: ", reproduction_count, ", mutate chance: ", mutation_chance, ", health: ", health, ", max_speed: ", max_speed, ", turn max_speed: ", homing_speed, ", power: ", power)
@@ -65,6 +74,23 @@ func clone() -> Enemy:
 	var clone = self_scene.instantiate() as Enemy
 	clone.self_scene = self_scene
 	return clone
+	
+func analyze(percentage: int):
+	current_analyzation_time += percentage
+	print("")
+	print("Analyzed: ", name, ", current time: ", current_analyzation_time, "/", max_analyzation_time)
+	print("")
+	if current_analyzation_time >= max_analyzation_time:
+		die() 
+
+func slow(rate:float):
+	if not is_slowed:
+		is_slowed = true
+		temp_speed = max_speed
+		max_speed /= rate
+	elif is_slowed:
+		max_speed = temp_speed
+		is_slowed = false
 
 func kill() -> void:
 	if randf() < .2:

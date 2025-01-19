@@ -11,6 +11,8 @@ signal damaged(which_entity: Entity)
 @export var rps: float = 5.0
 @export var moveable := true
 @export var friction: float = .05
+@export var is_slowed = false
+var temp_speed = max_speed
 
 func take_damage(damage) -> void:
 	if damage < 0:

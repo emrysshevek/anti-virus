@@ -27,6 +27,7 @@ far_speed = 50
 near_speed = 100
 hover_range = Vector2(100, 150)
 lifespan = 120.0
+max_analyzation_time = 10
 type = 4
 max_speed = 75.0
 homing_speed = 500.0

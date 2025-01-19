@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://bcwqj1lhkdaau" path="res://assets/bg_tileset.tres" id="1_034a7"]
 [ext_resource type="PackedScene" uid="uid://v4nfvxokwuq4" path="res://entities/player/player.tscn" id="2_o5pfe"]
 [ext_resource type="Script" path="res://scenes/battle_camera.gd" id="3_x6cwa"]
-[ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="4_w0dl2"]
 [ext_resource type="PackedScene" uid="uid://bs5xxbng5t4f2" path="res://scenes/hud/hud.tscn" id="5_ovs87"]
+[ext_resource type="PackedScene" uid="uid://demaoybjk1shm" path="res://entities/enemy/basic/basic.tscn" id="6_fccbe"]
 
 [node name="Battle" type="Node2D"]
 
@@ -19,6 +19,16 @@ tile_set = ExtResource("1_034a7")
 
 [node name="player" parent="." instance=ExtResource("2_o5pfe")]
 position = Vector2(19, -14)
+slow_rate = 1000.0
+
+[node name="slow_area" parent="player" index="4"]
+visible = false
+monitoring = false
+
+[node name="analyzation_area" parent="player" index="5"]
+visible = false
+scale = Vector2(0.335, 0.335)
+monitoring = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -27,8 +37,9 @@ offset_left = 3.0
 offset_right = 3.0
 scale = Vector2(1.02166, 1)
 
-[node name="Basic" parent="." instance=ExtResource("4_w0dl2")]
+[node name="Basic" parent="." instance=ExtResource("6_fccbe")]
 position = Vector2(4, 1)
+speed_range = Vector2(15, 75)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
@@ -36,3 +47,5 @@ zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 script = ExtResource("3_x6cwa")
 zoom_range = Vector2(4, 1)
+
+[editable path="player"]

@@ -6,6 +6,7 @@ class_name DashAbility
 @export var dash_cooldown = 3.0
 @export var is_unlocked = false
 
+
 var dash_timer = 0.0
 var dash_cooldown_timer = 0.0
 var is_dashing = false
