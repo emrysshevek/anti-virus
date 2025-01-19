@@ -23,6 +23,7 @@ lifespan = 100000.0
 reproduction_chance = 0.0
 reproduction_count = 0.0
 mutation_chance = 0.0
+type = 2
 max_speed = 50.0
 friction = 0.3
 

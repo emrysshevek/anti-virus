@@ -5,6 +5,15 @@ signal reproduced(child: Enemy)
 signal mutated(mutation: Enemy)
 signal dropped_pickup(which_pickup: Pickup)
 
+enum EnemyType {
+	BASIC,
+	FLU,
+	FUNGUS,
+	NEUROTOXIN,
+	BACTERIA,
+	HOOKWORM
+}
+
 @export var lifespan: float = 10.0
 
 @export var reproduction_chance: float = 1
@@ -16,18 +25,21 @@ signal dropped_pickup(which_pickup: Pickup)
 @export var max_analyzation_time: int = 100
 var current_analyzation_time: int = 0
 
+@export var type: EnemyType
+
 var target_position: Vector2
 var self_scene: PackedScene
 
 @onready var lifespan_timer: Timer = $Timer
 
 func _ready() -> void:
-	print("Spawned enemy")
-	randomize_stats()
+	print("Spawned ", str(type))
 	print_stats()
 
 	lifespan_timer.wait_time = lifespan
 	lifespan_timer.start()
+
+	Globals.enemy_counts[type] += 1
 
 func _physics_process(delta: float) -> void:
 	if current_analyzation_time >= max_analyzation_time:
@@ -44,12 +56,11 @@ func _process(_delta):
 		queue_free()
 
 func print_stats() -> void:
-	print("lifespan: ", lifespan, ", repro chance: ", reproduction_chance, ", repro count: ", reproduction_chance, "mutate chance: ", mutation_chance, ", health: ", health, ", max_speed: ", max_speed, ", turn max_speed: ", homing_speed, ", power: ", power)
+	print("lifespan: ", lifespan, ", repro chance: ", reproduction_chance, ", repro count: ", reproduction_count, ", mutate chance: ", mutation_chance, ", health: ", health, ", max_speed: ", max_speed, ", turn max_speed: ", homing_speed, ", power: ", power)
 
 func randomize_stats() -> void:
 	lifespan = lifespan * randf_range(1-variation, 1+variation)
 
-	reproduction_chance = clamp(reproduction_chance * randf_range(1-variation, 1+variation), 0, 1)
 	mutation_chance = clamp(mutation_chance * randf_range(1-variation, 1+variation), 0, 1)
 
 	health = max(health * randf_range(1-variation, 1+variation), 1)
@@ -97,7 +108,6 @@ func _pack_self() -> void:
 	if result != OK:
 		push_error(error_string(result))
 	
-
 func _recursive_set_owner(node: Node) -> void:
 	for child in node.get_children():
 		child.owner = self
@@ -107,17 +117,25 @@ func _reproduce() -> void:
 	var parent = get_parent()
 	for i in round(reproduction_count):
 		var child = clone()
-		if randf() < mutation_chance:
-			child.mutate()
+		init_child(child)
 
 		parent.add_child(child)
+		print("reproduced child")
 
 		child.global_position = global_position + Vector2(randf_range(-1, 1), randf_range(-1,1))
 
 		reproduced.emit(child)
 
+func init_child(child: Enemy) -> void:
+	pass
+
 func mutate() -> void:
 	mutated.emit()
+
+func die() -> void:
+	print("died")
+	Globals.enemy_counts[type] -= 1
+	super.die()
 
 func _on_end_of_life() -> void:
 	if reproduction_chance > 0 and randf() < reproduction_chance:
@@ -127,3 +145,7 @@ func _on_end_of_life() -> void:
 
 func _on_timer_timeout() -> void:
 	_on_end_of_life()
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	print("enemy died offscreen")
+	die()

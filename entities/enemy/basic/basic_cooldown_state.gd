@@ -1,7 +1,7 @@
 class_name BasicCooldownState
 extends EnemyState
 
-@export var cooldown_duration := .75
+@export var cooldown_duration := .5
 
 var timer: Timer
 
@@ -20,6 +20,7 @@ func physics_update(_delta: float) -> void:
 	entity.velocity *= 1 - entity.friction
 
 func _on_timer_timeout() -> void:
+	print("remaining lifespan: ", entity.lifespan_timer.time_left)
 	if entity.lifespan_timer.time_left == 0:
 		entity._on_end_of_life()
 		return

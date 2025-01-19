@@ -1,15 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://demaoybjk1shm"]
+[gd_scene load_steps=9 format=3 uid="uid://demaoybjk1shm"]
 
 [ext_resource type="PackedScene" uid="uid://m8xobidog0rl" path="res://entities/enemy/enemy.tscn" id="1_p25o1"]
 [ext_resource type="Script" path="res://entities/enemy/basic/basic.gd" id="2_3dldj"]
 [ext_resource type="Script" path="res://components/state machine/state_machine.gd" id="3_ubhpw"]
 [ext_resource type="Script" path="res://entities/enemy/basic/basic_init_state.gd" id="4_kmrrg"]
 [ext_resource type="Script" path="res://entities/enemy/basic/basic_move_state.gd" id="5_8gmf4"]
+[ext_resource type="PackedScene" uid="uid://pk86ls5ad5tm" path="res://components/movements/linear_movement.tscn" id="6_6sfah"]
 [ext_resource type="Script" path="res://entities/enemy/basic/basic_cooldown_state.gd" id="6_akn60"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ta1fy"]
+radius = 16.0
 
 [node name="Basic" instance=ExtResource("1_p25o1")]
 script = ExtResource("2_3dldj")
+max_count = 25
+health_range = Vector2(3, 15)
+lifespan_range = Vector2(2, 30)
+speed_range = Vector2(25, 75)
+homing_range = Vector2(10, 100)
+stamina_range = Vector2(0.5, 5)
+mutation_range = Vector2(0, 0.5)
+lifespan = 2.0
+mutation_chance = 0.0
+stamina = 0.1
 max_analyzation_time = 20
+health = 3.0
+power = 1.0
+max_speed = 25.0
+homing_speed = 15.0
+rps = 0.5
 
 [node name="StateMachine" type="Node" parent="." index="3"]
 script = ExtResource("3_ubhpw")
@@ -27,3 +46,16 @@ cooldown_duration = 2.0
 [node name="Detection" parent="." index="4"]
 collision_layer = 7
 collision_mask = 15
+
+[node name="PersonalSpaceArea" type="Area2D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PersonalSpaceArea" index="0"]
+shape = SubResource("CircleShape2D_ta1fy")
+
+[node name="LinearMovement" parent="." index="6" instance=ExtResource("6_6sfah")]
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="7"]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(2, 2)

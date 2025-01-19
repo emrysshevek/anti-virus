@@ -1,6 +1,14 @@
 class_name Basic
 extends Enemy
 
+@export var max_count: int = 25
+@export var health_range: Vector2 = Vector2(3, 15)
+@export var lifespan_range := Vector2(2, 30)
+@export var speed_range := Vector2(15, 50)
+@export var homing_range := Vector2(10, 100)
+@export var stamina_range := Vector2(.5, 5)
+@export var mutation_range := Vector2(0, .5)
+
 var movements = [
 	MovementWrapper.new("linear", "propulsion", preload("res://components/movements/linear_movement.tscn")),
 	MovementWrapper.new("track", "propulsion", preload("res://components/movements/tracking_movement.tscn")),
@@ -12,16 +20,30 @@ var movements = [
 var movement_propulsion: Movement
 var movement_modifiers: Array[Movement]
 
+@onready var personal_space: Area2D = $PersonalSpaceArea
+
+func init_child(child: Enemy) -> void:
+	var basic = child as Basic
+	var time_weight := Globals.game_time_ratio()
+
+	basic.health = (((1 - time_weight) * health_range.x ) + (time_weight * health_range.y)) * randf_range(1-variation, 1+variation)
+	basic.lifespan = (((1 - time_weight) * lifespan_range.x) + (time_weight * lifespan_range.y)) * randf_range(1-variation, 1+variation)
+	basic.max_speed = ((1 - time_weight) * speed_range.x + time_weight * speed_range.y) * randf_range(1-variation, 1+variation)
+	basic.homing_speed = ((1 - time_weight) * homing_range.x + time_weight * homing_range.y) * randf_range(1-variation, 1+variation)
+	basic.stamina = ((1 - time_weight) * stamina_range.x + time_weight * stamina_range.y) * randf_range(1-variation, 1+variation)
+	basic.mutation_chance = ((1 - time_weight) * mutation_range.x + time_weight * mutation_range.y) * randf_range(1-variation, 1+variation)
+
+	if randf() < mutation_chance:
+		basic.mutate()
+
 func mutate() -> void:
 	print("mutating cell")
 
 	var rng = randf()
 	var type: String = "any"
 
-	if rng < .33:
+	if rng < .5:
 		type = _add_movement()
-	elif rng < .66:
-		type = _remove_movement()
 	else:
 		type = _swap_movement()
 
@@ -90,3 +112,10 @@ func _swap_movement(type:="any") -> String:
 	_add_movement(type)
 
 	return type
+
+func _on_end_of_life() -> void:
+	reproduction_chance = 1 - (Globals.enemy_counts[type] / float(max_count * reproduction_count))
+	super._on_end_of_life()
+
+func _on_timer_timeout() -> void:
+	pass # handle end of life in cooldown
