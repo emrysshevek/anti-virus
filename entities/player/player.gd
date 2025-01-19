@@ -31,6 +31,7 @@ var platelet_instance : Platelets
 func _ready():
 	$player_animation.play("idle")
 	$analyzation_area/analyze_animation.play("idle")
+	$slow_area/slow_animation.play("idle")
 	if player_data != null:
 		health = player_data.health
 		max_speed = player_data.speed * 20
@@ -133,3 +134,10 @@ func aquire_dash():
 	else:
 		print("You already unlocked the dash ability!")
 	
+
+
+func _on_slow_area_body_exited(body:Node2D):
+	pass # Replace with function body.
+
+func _on_slow_area_body_entered(body:Node2D):
+	pass # Replace with function body.
