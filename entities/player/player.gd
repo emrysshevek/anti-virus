@@ -11,6 +11,7 @@ extends Entity
 @export var platelet_scene: PackedScene
 @export var max_upgrades: Array = [false, false, false, false]
 @export var slow_rate = 2.0
+@export var bullet_scene: PackedScene
 
 var unlock_platelet: bool = false
 
@@ -28,7 +29,7 @@ const move_snap = 2
 @onready var shield_ability: ShieldAbility = $ShieldAbility
 @onready var analyzation_timer: Timer = $analyzation_area/analyzation_timer
 @onready var slow_timer: Timer = $slow_area/slow_timer
-
+@onready var shot_time : Timer = $ShotTimer
 var input = Vector2.ZERO
 var platelet_instance : Platelets
 
@@ -49,6 +50,8 @@ func _physics_process(delta):
 	player_movement(delta)
 	if Input.is_action_just_pressed("unlock"):
 		aquire_dash()
+		shot_time.wait_time *= 0.95
+		print(shot_time.wait_time)
 		health += 1
 
 func _process(_delta):
@@ -152,3 +155,28 @@ func _on_slow_area_body_exited(body:Node2D):
 	if body.is_in_group("enemy"):
 		body.slow(slow_rate)
 		print(str(body.name) + " exited the slowing range")
+
+func _on_shot_timer_timeout():
+	spawn_projectile(Vector2(0, -1))  # Up/North
+	spawn_projectile(Vector2(0, 1))  # Down/South
+	spawn_projectile(Vector2(1, 0))  # Right/East
+	spawn_projectile(Vector2(-1, 0))  # Left/West
+
+	spawn_projectile(Vector2(1, -1))  # NE
+	spawn_projectile(Vector2(1, 1))  # SE
+	spawn_projectile(Vector2(-1, -1))  # NW
+	spawn_projectile(Vector2(-1, 1))  # SW
+
+func spawn_projectile(direction: Vector2):
+	if bullet_scene:
+		var proj = bullet_scene.instantiate()
+		var offset_distance: float = 5.0
+		var spawn_offset: Vector2 = direction.normalized() * offset_distance
+		var spawn_position: Vector2 = global_position + spawn_offset
+
+		var current_scene = get_tree().get_current_scene()
+		current_scene.add_child(proj)
+		proj.global_position = spawn_position
+		proj.direction = direction.normalized()
+	else:
+		print("No projectile_scene assigned!")

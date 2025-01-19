@@ -26,6 +26,7 @@ offset_bottom = 23.0
 text = "Heath: XXX"
 
 [node name="Time" type="Label" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 144.0

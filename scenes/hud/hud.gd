@@ -21,7 +21,7 @@ func _ready():
     print(Globals.countdown)
 
 func _process(_delta) -> void:
-    $Time.text = "Time: %02d" % progress_bar.value
+   # $Time.text = "Time: %02d" % progress_bar.value
     progress_bar.value += 1
     if has_player:
         health_label.text = "Heath: " + str(player.health)

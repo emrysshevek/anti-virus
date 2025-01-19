@@ -38,7 +38,7 @@ offset_right = 3.0
 scale = Vector2(1.02166, 1)
 
 [node name="Basic" parent="." instance=ExtResource("6_fccbe")]
-position = Vector2(4, 1)
+position = Vector2(-56, 18)
 speed_range = Vector2(15, 75)
 
 [node name="Camera2D" type="Camera2D" parent="."]
